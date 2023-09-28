@@ -1,0 +1,156 @@
+# ////ONLY TO GETT STARTED
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
+
+type Usuario @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  nombre: String!
+  correo: String!
+  contrasena: String!
+  tipo_usuario: String!
+  creado_en: AWSDateTime!
+  vecino: Vecino @hasOne
+  negocio: Negocio @hasOne
+  publicaciones: [Publicacion] @hasMany(indexName: "byUsuario", fields: ["id"])
+  mensajesEnviados: [Mensaje] @hasMany(indexName: "byEmisor", fields: ["id"])
+  mensajesRecibidos: [Mensaje] @hasMany(indexName: "byReceptor", fields: ["id"])
+  reviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
+  grupos: [UsuarioGrupo] @hasMany(indexName: "byUsuario", fields: ["id"])
+  gruposCreados: [Grupo] @hasMany(fields: ["id"])
+}
+
+type Vecino @model  @auth(rules: [{ allow: owner }]){
+  id: ID!
+  usuarioID: ID! @index(name: "byUsuario")
+  usuario: Usuario @belongsTo(fields: ["usuarioID"])
+  direccion: String!
+  barrioID: ID! @index(name: "byBarrio")
+  barrio: Barrio @belongsTo(fields: ["barrioID"])
+  telefono: String!
+  foto_perfil: String
+  intereses: [String]
+  cupones: [Cupon] @hasMany(indexName: "byUsuario", fields: ["id"])
+}
+
+type Negocio @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  usuarioID: ID! @index(name: "byUsuario")
+  usuario: Usuario @belongsTo(fields: ["usuarioID"])
+  nombre_negocio: String!
+  logo: String!
+  banner: String!
+  direccion: String!
+  telefono: String!
+  categoriaID: ID! @index(name: "byCatergoria")
+  categoria: Categoria @belongsTo(fields: ["categoriaID"])
+  descripcion: String!
+  horario: String!
+  puntuacion_promedio: Float!
+  cupones: [Cupon] @hasMany(indexName: "byNegocio", fields: ["id"])
+  reviews: [Review] @hasMany(indexName: "byNegocio", fields: ["id"])
+}
+
+type Barrio @model @auth(rules: [{ allow: owner, operations: [read] }, { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] }]){
+  id: ID!
+  nombre: String!
+  vecinos: [Vecino] @hasMany(indexName: "byBarrio", fields: ["id"])
+}
+
+type Cupon @model  @auth(rules: [{ allow: owner }]) {
+  id_cupon: ID!
+  negocioID: ID!  @index(name: "byNegocio")
+  negocio: Negocio @belongsTo(fields: ["negocioID"]) 
+  descripcion: String!
+  codigo: String!
+  fecha_expiracion: AWSDateTime!
+  fecha_expedicion: AWSDateTime!
+  imagen: String!
+  descuento: Float!
+  id_usuario: ID! @index(name: "byUsuario")
+}
+
+type Categoria @model @auth(rules: [{ allow: owner, operations: [read] }, { allow: groups, groups: ["Admin"], operations: [create, update, delete] }]){
+  id_categoria: ID!
+  nombre: String!
+  descripcion: String!
+  negocios: [Negocio] @hasMany(indexName: "byCatergoria", fields: ["id_categoria"])
+}
+
+type Publicacion @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  timestamp: AWSDateTime!
+  usuarioID: ID!@index(name: "byUsuario")
+  usuario: Usuario @belongsTo(fields: ["usuarioID"])
+  categoria: String!
+  titulo: String!
+  contenido: String!
+  imagenes: [String]
+  videos: [String]
+}
+
+type Mensaje @model @auth(rules: [{ allow: owner }]){
+  mensaje_id: ID!
+  emisorID: ID! @index(name: "byEmisor")
+  emisor: Usuario @belongsTo(fields: ["emisorID"])
+  receptorID: ID! @index(name: "byReceptor")
+  receptor: Usuario @belongsTo(fields: ["receptorID"])
+  mensaje: String!
+  timestamp: AWSDateTime!
+  leido: Boolean!
+}
+
+type Grupo @model @auth(rules: [{ allow: owner }]){
+  id_grupo: ID!
+  nombre: String!
+  descripcion: String!
+  fecha_creacion: AWSDateTime!
+  creado_porID: ID! @index(name: "byCreador")
+  creado_por: Usuario @belongsTo(fields: ["creado_porID"])
+  miembros: [UsuarioGrupo] @hasMany(indexName: "byGrupo", fields: ["id_grupo"])
+  intereses: [GrupoInteres] @hasMany(indexName: "byGrupo", fields: ["id_grupo"])
+}
+
+type Review @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  rating: Float!
+  comment: String!
+  userId: ID! @index(name: "byUser")
+  user: Usuario @belongsTo(fields: ["userId"])
+  negocioID: ID! @index(name: "byNegocio")
+  negocio: Negocio @belongsTo(fields: ["negocioID"])
+}
+
+type Interes @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  nombre: String!
+  grupos: [GrupoInteres] @hasMany(indexName: "byInteres", fields: ["id"])
+}
+
+type UsuarioGrupo @model  @auth(rules: [{ allow: owner }]){
+  id: ID!
+  usuarioID: ID! @index(name: "byUsuario")
+  grupoID: ID! @index(name: "byGrupo")
+  usuario: Usuario @belongsTo(fields: ["usuarioID"])
+  grupo: Grupo @belongsTo(fields: ["grupoID"])
+}
+
+type GrupoInteres @model  @auth(rules: [{ allow: owner }]){
+  id: ID!
+  grupoID: ID! @index(name: "byGrupo")
+  interesID: ID! @index(name: "byInteres")
+  grupo: Grupo @belongsTo(fields: ["grupoID"])
+  interes: Interes @belongsTo(fields: ["interesID"])
+}
+
+type Notification @model @auth(rules: [{ allow: owner }]) 
+{
+  id: ID!
+  type: String!
+  content: String!
+  id_usuario: ID! @index(name: "byUsuario") 
+  isRead: Boolean!
+}
+
+
+
+
+
