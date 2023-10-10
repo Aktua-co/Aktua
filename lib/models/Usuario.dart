@@ -32,10 +32,13 @@ class Usuario extends Model {
   final String id;
   final String? _nombre;
   final String? _correo;
-  final String? _contrasena;
-  final String? _tipo_usuario;
+  final String? _direccion;
   final TemporalDateTime? _creado_en;
-  final Vecino? _vecino;
+  final int? _rango_visibilidad;
+  final Barrio? _barrio;
+  final String? _telefono;
+  final String? _foto_perfil;
+  final List<String>? _intereses;
   final Negocio? _negocio;
   final List<Publicacion>? _publicaciones;
   final List<Mensaje>? _mensajesEnviados;
@@ -43,9 +46,9 @@ class Usuario extends Model {
   final List<Review>? _reviews;
   final List<UsuarioGrupo>? _grupos;
   final List<Grupo>? _gruposCreados;
+  final List<Cupon>? _cupones;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
-  final String? _usuarioVecinoId;
   final String? _usuarioNegocioId;
 
   @override
@@ -87,13 +90,9 @@ class Usuario extends Model {
     }
   }
   
-  String? get contrasena {
-    return _contrasena;
-  }
-  
-  String get tipo_usuario {
+  String get direccion {
     try {
-      return _tipo_usuario!;
+      return _direccion!;
     } catch(e) {
       throw new AmplifyCodeGenModelException(
           AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -117,8 +116,42 @@ class Usuario extends Model {
     }
   }
   
-  Vecino? get vecino {
-    return _vecino;
+  int? get rango_visibilidad {
+    return _rango_visibilidad;
+  }
+  
+  Barrio get barrio {
+    try {
+      return _barrio!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String get telefono {
+    try {
+      return _telefono!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
+  String? get foto_perfil {
+    return _foto_perfil;
+  }
+  
+  List<String>? get intereses {
+    return _intereses;
   }
   
   Negocio? get negocio {
@@ -149,6 +182,10 @@ class Usuario extends Model {
     return _gruposCreados;
   }
   
+  List<Cupon>? get cupones {
+    return _cupones;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -157,25 +194,24 @@ class Usuario extends Model {
     return _updatedAt;
   }
   
-  String? get usuarioVecinoId {
-    return _usuarioVecinoId;
-  }
-  
   String? get usuarioNegocioId {
     return _usuarioNegocioId;
   }
   
-  const Usuario._internal({required this.id, required nombre, required correo, contrasena, required tipo_usuario, required creado_en, vecino, negocio, publicaciones, mensajesEnviados, mensajesRecibidos, reviews, grupos, gruposCreados, createdAt, updatedAt, usuarioVecinoId, usuarioNegocioId}): _nombre = nombre, _correo = correo, _contrasena = contrasena, _tipo_usuario = tipo_usuario, _creado_en = creado_en, _vecino = vecino, _negocio = negocio, _publicaciones = publicaciones, _mensajesEnviados = mensajesEnviados, _mensajesRecibidos = mensajesRecibidos, _reviews = reviews, _grupos = grupos, _gruposCreados = gruposCreados, _createdAt = createdAt, _updatedAt = updatedAt, _usuarioVecinoId = usuarioVecinoId, _usuarioNegocioId = usuarioNegocioId;
+  const Usuario._internal({required this.id, required nombre, required correo, required direccion, required creado_en, rango_visibilidad, required barrio, required telefono, foto_perfil, intereses, negocio, publicaciones, mensajesEnviados, mensajesRecibidos, reviews, grupos, gruposCreados, cupones, createdAt, updatedAt, usuarioNegocioId}): _nombre = nombre, _correo = correo, _direccion = direccion, _creado_en = creado_en, _rango_visibilidad = rango_visibilidad, _barrio = barrio, _telefono = telefono, _foto_perfil = foto_perfil, _intereses = intereses, _negocio = negocio, _publicaciones = publicaciones, _mensajesEnviados = mensajesEnviados, _mensajesRecibidos = mensajesRecibidos, _reviews = reviews, _grupos = grupos, _gruposCreados = gruposCreados, _cupones = cupones, _createdAt = createdAt, _updatedAt = updatedAt, _usuarioNegocioId = usuarioNegocioId;
   
-  factory Usuario({String? id, required String nombre, required String correo, String? contrasena, required String tipo_usuario, required TemporalDateTime creado_en, Vecino? vecino, Negocio? negocio, List<Publicacion>? publicaciones, List<Mensaje>? mensajesEnviados, List<Mensaje>? mensajesRecibidos, List<Review>? reviews, List<UsuarioGrupo>? grupos, List<Grupo>? gruposCreados, String? usuarioVecinoId, String? usuarioNegocioId}) {
+  factory Usuario({String? id, required String nombre, required String correo, required String direccion, required TemporalDateTime creado_en, int? rango_visibilidad, required Barrio barrio, required String telefono, String? foto_perfil, List<String>? intereses, Negocio? negocio, List<Publicacion>? publicaciones, List<Mensaje>? mensajesEnviados, List<Mensaje>? mensajesRecibidos, List<Review>? reviews, List<UsuarioGrupo>? grupos, List<Grupo>? gruposCreados, List<Cupon>? cupones, String? usuarioNegocioId}) {
     return Usuario._internal(
       id: id == null ? UUID.getUUID() : id,
       nombre: nombre,
       correo: correo,
-      contrasena: contrasena,
-      tipo_usuario: tipo_usuario,
+      direccion: direccion,
       creado_en: creado_en,
-      vecino: vecino,
+      rango_visibilidad: rango_visibilidad,
+      barrio: barrio,
+      telefono: telefono,
+      foto_perfil: foto_perfil,
+      intereses: intereses != null ? List<String>.unmodifiable(intereses) : intereses,
       negocio: negocio,
       publicaciones: publicaciones != null ? List<Publicacion>.unmodifiable(publicaciones) : publicaciones,
       mensajesEnviados: mensajesEnviados != null ? List<Mensaje>.unmodifiable(mensajesEnviados) : mensajesEnviados,
@@ -183,7 +219,7 @@ class Usuario extends Model {
       reviews: reviews != null ? List<Review>.unmodifiable(reviews) : reviews,
       grupos: grupos != null ? List<UsuarioGrupo>.unmodifiable(grupos) : grupos,
       gruposCreados: gruposCreados != null ? List<Grupo>.unmodifiable(gruposCreados) : gruposCreados,
-      usuarioVecinoId: usuarioVecinoId,
+      cupones: cupones != null ? List<Cupon>.unmodifiable(cupones) : cupones,
       usuarioNegocioId: usuarioNegocioId);
   }
   
@@ -198,10 +234,13 @@ class Usuario extends Model {
       id == other.id &&
       _nombre == other._nombre &&
       _correo == other._correo &&
-      _contrasena == other._contrasena &&
-      _tipo_usuario == other._tipo_usuario &&
+      _direccion == other._direccion &&
       _creado_en == other._creado_en &&
-      _vecino == other._vecino &&
+      _rango_visibilidad == other._rango_visibilidad &&
+      _barrio == other._barrio &&
+      _telefono == other._telefono &&
+      _foto_perfil == other._foto_perfil &&
+      DeepCollectionEquality().equals(_intereses, other._intereses) &&
       _negocio == other._negocio &&
       DeepCollectionEquality().equals(_publicaciones, other._publicaciones) &&
       DeepCollectionEquality().equals(_mensajesEnviados, other._mensajesEnviados) &&
@@ -209,7 +248,7 @@ class Usuario extends Model {
       DeepCollectionEquality().equals(_reviews, other._reviews) &&
       DeepCollectionEquality().equals(_grupos, other._grupos) &&
       DeepCollectionEquality().equals(_gruposCreados, other._gruposCreados) &&
-      _usuarioVecinoId == other._usuarioVecinoId &&
+      DeepCollectionEquality().equals(_cupones, other._cupones) &&
       _usuarioNegocioId == other._usuarioNegocioId;
   }
   
@@ -224,27 +263,33 @@ class Usuario extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("nombre=" + "$_nombre" + ", ");
     buffer.write("correo=" + "$_correo" + ", ");
-    buffer.write("contrasena=" + "$_contrasena" + ", ");
-    buffer.write("tipo_usuario=" + "$_tipo_usuario" + ", ");
+    buffer.write("direccion=" + "$_direccion" + ", ");
     buffer.write("creado_en=" + (_creado_en != null ? _creado_en!.format() : "null") + ", ");
+    buffer.write("rango_visibilidad=" + (_rango_visibilidad != null ? _rango_visibilidad!.toString() : "null") + ", ");
+    buffer.write("barrio=" + (_barrio != null ? _barrio!.toString() : "null") + ", ");
+    buffer.write("telefono=" + "$_telefono" + ", ");
+    buffer.write("foto_perfil=" + "$_foto_perfil" + ", ");
+    buffer.write("intereses=" + (_intereses != null ? _intereses!.toString() : "null") + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null") + ", ");
-    buffer.write("usuarioVecinoId=" + "$_usuarioVecinoId" + ", ");
     buffer.write("usuarioNegocioId=" + "$_usuarioNegocioId");
     buffer.write("}");
     
     return buffer.toString();
   }
   
-  Usuario copyWith({String? nombre, String? correo, String? contrasena, String? tipo_usuario, TemporalDateTime? creado_en, Vecino? vecino, Negocio? negocio, List<Publicacion>? publicaciones, List<Mensaje>? mensajesEnviados, List<Mensaje>? mensajesRecibidos, List<Review>? reviews, List<UsuarioGrupo>? grupos, List<Grupo>? gruposCreados, String? usuarioVecinoId, String? usuarioNegocioId}) {
+  Usuario copyWith({String? nombre, String? correo, String? direccion, TemporalDateTime? creado_en, int? rango_visibilidad, Barrio? barrio, String? telefono, String? foto_perfil, List<String>? intereses, Negocio? negocio, List<Publicacion>? publicaciones, List<Mensaje>? mensajesEnviados, List<Mensaje>? mensajesRecibidos, List<Review>? reviews, List<UsuarioGrupo>? grupos, List<Grupo>? gruposCreados, List<Cupon>? cupones, String? usuarioNegocioId}) {
     return Usuario._internal(
       id: id,
       nombre: nombre ?? this.nombre,
       correo: correo ?? this.correo,
-      contrasena: contrasena ?? this.contrasena,
-      tipo_usuario: tipo_usuario ?? this.tipo_usuario,
+      direccion: direccion ?? this.direccion,
       creado_en: creado_en ?? this.creado_en,
-      vecino: vecino ?? this.vecino,
+      rango_visibilidad: rango_visibilidad ?? this.rango_visibilidad,
+      barrio: barrio ?? this.barrio,
+      telefono: telefono ?? this.telefono,
+      foto_perfil: foto_perfil ?? this.foto_perfil,
+      intereses: intereses ?? this.intereses,
       negocio: negocio ?? this.negocio,
       publicaciones: publicaciones ?? this.publicaciones,
       mensajesEnviados: mensajesEnviados ?? this.mensajesEnviados,
@@ -252,7 +297,7 @@ class Usuario extends Model {
       reviews: reviews ?? this.reviews,
       grupos: grupos ?? this.grupos,
       gruposCreados: gruposCreados ?? this.gruposCreados,
-      usuarioVecinoId: usuarioVecinoId ?? this.usuarioVecinoId,
+      cupones: cupones ?? this.cupones,
       usuarioNegocioId: usuarioNegocioId ?? this.usuarioNegocioId);
   }
   
@@ -260,12 +305,15 @@ class Usuario extends Model {
     : id = json['id'],
       _nombre = json['nombre'],
       _correo = json['correo'],
-      _contrasena = json['contrasena'],
-      _tipo_usuario = json['tipo_usuario'],
+      _direccion = json['direccion'],
       _creado_en = json['creado_en'] != null ? TemporalDateTime.fromString(json['creado_en']) : null,
-      _vecino = json['vecino']?['serializedData'] != null
-        ? Vecino.fromJson(new Map<String, dynamic>.from(json['vecino']['serializedData']))
+      _rango_visibilidad = (json['rango_visibilidad'] as num?)?.toInt(),
+      _barrio = json['barrio']?['serializedData'] != null
+        ? Barrio.fromJson(new Map<String, dynamic>.from(json['barrio']['serializedData']))
         : null,
+      _telefono = json['telefono'],
+      _foto_perfil = json['foto_perfil'],
+      _intereses = json['intereses']?.cast<String>(),
       _negocio = json['negocio']?['serializedData'] != null
         ? Negocio.fromJson(new Map<String, dynamic>.from(json['negocio']['serializedData']))
         : null,
@@ -305,29 +353,37 @@ class Usuario extends Model {
           .map((e) => Grupo.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
+      _cupones = json['cupones'] is List
+        ? (json['cupones'] as List)
+          .where((e) => e?['serializedData'] != null)
+          .map((e) => Cupon.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
+          .toList()
+        : null,
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null,
-      _usuarioVecinoId = json['usuarioVecinoId'],
       _usuarioNegocioId = json['usuarioNegocioId'];
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'nombre': _nombre, 'correo': _correo, 'contrasena': _contrasena, 'tipo_usuario': _tipo_usuario, 'creado_en': _creado_en?.format(), 'vecino': _vecino?.toJson(), 'negocio': _negocio?.toJson(), 'publicaciones': _publicaciones?.map((Publicacion? e) => e?.toJson()).toList(), 'mensajesEnviados': _mensajesEnviados?.map((Mensaje? e) => e?.toJson()).toList(), 'mensajesRecibidos': _mensajesRecibidos?.map((Mensaje? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'grupos': _grupos?.map((UsuarioGrupo? e) => e?.toJson()).toList(), 'gruposCreados': _gruposCreados?.map((Grupo? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format(), 'usuarioVecinoId': _usuarioVecinoId, 'usuarioNegocioId': _usuarioNegocioId
+    'id': id, 'nombre': _nombre, 'correo': _correo, 'direccion': _direccion, 'creado_en': _creado_en?.format(), 'rango_visibilidad': _rango_visibilidad, 'barrio': _barrio?.toJson(), 'telefono': _telefono, 'foto_perfil': _foto_perfil, 'intereses': _intereses, 'negocio': _negocio?.toJson(), 'publicaciones': _publicaciones?.map((Publicacion? e) => e?.toJson()).toList(), 'mensajesEnviados': _mensajesEnviados?.map((Mensaje? e) => e?.toJson()).toList(), 'mensajesRecibidos': _mensajesRecibidos?.map((Mensaje? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'grupos': _grupos?.map((UsuarioGrupo? e) => e?.toJson()).toList(), 'gruposCreados': _gruposCreados?.map((Grupo? e) => e?.toJson()).toList(), 'cupones': _cupones?.map((Cupon? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format(), 'usuarioNegocioId': _usuarioNegocioId
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'nombre': _nombre, 'correo': _correo, 'contrasena': _contrasena, 'tipo_usuario': _tipo_usuario, 'creado_en': _creado_en, 'vecino': _vecino, 'negocio': _negocio, 'publicaciones': _publicaciones, 'mensajesEnviados': _mensajesEnviados, 'mensajesRecibidos': _mensajesRecibidos, 'reviews': _reviews, 'grupos': _grupos, 'gruposCreados': _gruposCreados, 'createdAt': _createdAt, 'updatedAt': _updatedAt, 'usuarioVecinoId': _usuarioVecinoId, 'usuarioNegocioId': _usuarioNegocioId
+    'id': id, 'nombre': _nombre, 'correo': _correo, 'direccion': _direccion, 'creado_en': _creado_en, 'rango_visibilidad': _rango_visibilidad, 'barrio': _barrio, 'telefono': _telefono, 'foto_perfil': _foto_perfil, 'intereses': _intereses, 'negocio': _negocio, 'publicaciones': _publicaciones, 'mensajesEnviados': _mensajesEnviados, 'mensajesRecibidos': _mensajesRecibidos, 'reviews': _reviews, 'grupos': _grupos, 'gruposCreados': _gruposCreados, 'cupones': _cupones, 'createdAt': _createdAt, 'updatedAt': _updatedAt, 'usuarioNegocioId': _usuarioNegocioId
   };
 
   static final QueryModelIdentifier<UsuarioModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<UsuarioModelIdentifier>();
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NOMBRE = QueryField(fieldName: "nombre");
   static final QueryField CORREO = QueryField(fieldName: "correo");
-  static final QueryField CONTRASENA = QueryField(fieldName: "contrasena");
-  static final QueryField TIPO_USUARIO = QueryField(fieldName: "tipo_usuario");
+  static final QueryField DIRECCION = QueryField(fieldName: "direccion");
   static final QueryField CREADO_EN = QueryField(fieldName: "creado_en");
-  static final QueryField VECINO = QueryField(
-    fieldName: "vecino",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Vecino'));
+  static final QueryField RANGO_VISIBILIDAD = QueryField(fieldName: "rango_visibilidad");
+  static final QueryField BARRIO = QueryField(
+    fieldName: "barrio",
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Barrio'));
+  static final QueryField TELEFONO = QueryField(fieldName: "telefono");
+  static final QueryField FOTO_PERFIL = QueryField(fieldName: "foto_perfil");
+  static final QueryField INTERESES = QueryField(fieldName: "intereses");
   static final QueryField NEGOCIO = QueryField(
     fieldName: "negocio",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Negocio'));
@@ -349,7 +405,9 @@ class Usuario extends Model {
   static final QueryField GRUPOSCREADOS = QueryField(
     fieldName: "gruposCreados",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Grupo'));
-  static final QueryField USUARIOVECINOID = QueryField(fieldName: "usuarioVecinoId");
+  static final QueryField CUPONES = QueryField(
+    fieldName: "cupones",
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Cupon'));
   static final QueryField USUARIONEGOCIOID = QueryField(fieldName: "usuarioNegocioId");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Usuario";
@@ -373,6 +431,10 @@ class Usuario extends Model {
         ])
     ];
     
+    modelSchemaDefinition.indexes = [
+      ModelIndex(fields: const ["barrioID"], name: "byBarrio")
+    ];
+    
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
@@ -388,13 +450,7 @@ class Usuario extends Model {
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Usuario.CONTRASENA,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Usuario.TIPO_USUARIO,
+      key: Usuario.DIRECCION,
       isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
@@ -405,11 +461,36 @@ class Usuario extends Model {
       ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasOne(
-      key: Usuario.VECINO,
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Usuario.RANGO_VISIBILIDAD,
       isRequired: false,
-      ofModelName: 'Vecino',
-      associatedKey: Vecino.USUARIO
+      ofType: ModelFieldType(ModelFieldTypeEnum.int)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+      key: Usuario.BARRIO,
+      isRequired: true,
+      targetNames: ['barrioID'],
+      ofModelName: 'Barrio'
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Usuario.TELEFONO,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Usuario.FOTO_PERFIL,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Usuario.INTERESES,
+      isRequired: false,
+      isArray: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.collection, ofModelName: describeEnum(ModelFieldTypeEnum.string))
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.hasOne(
@@ -461,6 +542,13 @@ class Usuario extends Model {
       associatedKey: Grupo.CREADO_POR
     ));
     
+    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+      key: Usuario.CUPONES,
+      isRequired: false,
+      ofModelName: 'Cupon',
+      associatedKey: Cupon.ID_USUARIO
+    ));
+    
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
@@ -473,12 +561,6 @@ class Usuario extends Model {
       isRequired: false,
       isReadOnly: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Usuario.USUARIOVECINOID,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(

@@ -33,7 +33,6 @@ import 'Publicacion.dart';
 import 'Review.dart';
 import 'Usuario.dart';
 import 'UsuarioGrupo.dart';
-import 'Vecino.dart';
 
 export 'Barrio.dart';
 export 'Categoria.dart';
@@ -48,13 +47,12 @@ export 'Publicacion.dart';
 export 'Review.dart';
 export 'Usuario.dart';
 export 'UsuarioGrupo.dart';
-export 'Vecino.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "86b2a73ee00735541dbbda5414aea1c9";
+  String version = "48f001c19f54475474f64a60508f3809";
   @override
-  List<ModelSchema> modelSchemas = [Barrio.schema, Categoria.schema, Cupon.schema, Grupo.schema, GrupoInteres.schema, Interes.schema, Mensaje.schema, Negocio.schema, Notification.schema, Publicacion.schema, Review.schema, Usuario.schema, UsuarioGrupo.schema, Vecino.schema];
+  List<ModelSchema> modelSchemas = [Barrio.schema, Categoria.schema, Cupon.schema, Grupo.schema, GrupoInteres.schema, Interes.schema, Mensaje.schema, Negocio.schema, Notification.schema, Publicacion.schema, Review.schema, Usuario.schema, UsuarioGrupo.schema];
   static final ModelProvider _instance = ModelProvider();
   @override
   List<ModelSchema> customTypeSchemas = [];
@@ -89,8 +87,6 @@ class ModelProvider implements ModelProviderInterface {
         return Usuario.classType;
       case "UsuarioGrupo":
         return UsuarioGrupo.classType;
-      case "Vecino":
-        return Vecino.classType;
       default:
         throw Exception("Failed to find model in model provider for model name: " + modelName);
     }

@@ -91,14 +91,18 @@ Future<AuthResponse> confirmUser({
 Future<void> saveUser(
   String nombre,
   String correo,
-  String tipoUsuario,
+  String barrio,
+  String direccion,
+  String telefono,
 
 ) async {
   final newUser = Usuario(
     nombre: nombre,
     correo: correo,
-    tipo_usuario: tipoUsuario,
-    creado_en: TemporalDateTime.now(),
+    direccion: '', 
+    telefono: '',
+    barrio: Barrio(nombre:'', creado_en: TemporalDateTime.now()), 
+    creado_en: TemporalDateTime.now(), 
     
   );
 
@@ -118,3 +122,39 @@ Future<void> saveUser(
     safePrint('Something went wrong saving model: ${e.message}');
   }
 }
+
+Future<void> saveNegocio(
+  String nombre,
+  String correo,
+  String barrio,
+  String direccion,
+  String telefono,
+
+) async {
+  final newNegocio = Negocio(
+    nombre_negocio: '',
+    correo: correo, 
+    direccion: '', 
+    telefono: '', 
+    barrio: Barrio(nombre:'', creado_en: TemporalDateTime.now()),
+    creado_en: TemporalDateTime.now(),
+    
+  );
+
+  try {
+    final request = ModelMutations.create(
+      newNegocio,
+      authorizationMode: APIAuthorizationType.apiKey,
+      );
+    final res = await Amplify.API.mutate(request: request).response;
+    final resData = res.data;
+    if (resData == null) {
+      safePrint('errors: ${res.errors}');
+      return;
+    }
+    safePrint('Mutation result: ${resData.toJson()}');
+  } on DataStoreException catch (e) {
+    safePrint('Something went wrong saving model: ${e.message}');
+  }
+}
+

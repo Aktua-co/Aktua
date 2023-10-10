@@ -32,10 +32,13 @@ class Negocio extends Model {
   final String id;
   final Usuario? _usuario;
   final String? _nombre_negocio;
+  final Barrio? _barrio;
+  final String? _correo;
   final String? _logo;
   final String? _banner;
   final String? _direccion;
   final String? _telefono;
+  final TemporalDateTime? _creado_en;
   final Categoria? _categoria;
   final String? _descripcion;
   final String? _horario;
@@ -75,9 +78,13 @@ class Negocio extends Model {
     }
   }
   
-  String get logo {
+  Barrio? get barrio {
+    return _barrio;
+  }
+  
+  String get correo {
     try {
-      return _logo!;
+      return _correo!;
     } catch(e) {
       throw new AmplifyCodeGenModelException(
           AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
@@ -88,17 +95,12 @@ class Negocio extends Model {
     }
   }
   
-  String get banner {
-    try {
-      return _banner!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  String? get logo {
+    return _logo;
+  }
+  
+  String? get banner {
+    return _banner;
   }
   
   String get direccion {
@@ -127,47 +129,33 @@ class Negocio extends Model {
     }
   }
   
+  TemporalDateTime get creado_en {
+    try {
+      return _creado_en!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
   Categoria? get categoria {
     return _categoria;
   }
   
-  String get descripcion {
-    try {
-      return _descripcion!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  String? get descripcion {
+    return _descripcion;
   }
   
-  String get horario {
-    try {
-      return _horario!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  String? get horario {
+    return _horario;
   }
   
-  double get puntuacion_promedio {
-    try {
-      return _puntuacion_promedio!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  double? get puntuacion_promedio {
+    return _puntuacion_promedio;
   }
   
   List<Cupon>? get cupones {
@@ -186,17 +174,20 @@ class Negocio extends Model {
     return _updatedAt;
   }
   
-  const Negocio._internal({required this.id, usuario, required nombre_negocio, required logo, required banner, required direccion, required telefono, categoria, required descripcion, required horario, required puntuacion_promedio, cupones, reviews, createdAt, updatedAt}): _usuario = usuario, _nombre_negocio = nombre_negocio, _logo = logo, _banner = banner, _direccion = direccion, _telefono = telefono, _categoria = categoria, _descripcion = descripcion, _horario = horario, _puntuacion_promedio = puntuacion_promedio, _cupones = cupones, _reviews = reviews, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Negocio._internal({required this.id, usuario, required nombre_negocio, barrio, required correo, logo, banner, required direccion, required telefono, required creado_en, categoria, descripcion, horario, puntuacion_promedio, cupones, reviews, createdAt, updatedAt}): _usuario = usuario, _nombre_negocio = nombre_negocio, _barrio = barrio, _correo = correo, _logo = logo, _banner = banner, _direccion = direccion, _telefono = telefono, _creado_en = creado_en, _categoria = categoria, _descripcion = descripcion, _horario = horario, _puntuacion_promedio = puntuacion_promedio, _cupones = cupones, _reviews = reviews, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Negocio({String? id, Usuario? usuario, required String nombre_negocio, required String logo, required String banner, required String direccion, required String telefono, Categoria? categoria, required String descripcion, required String horario, required double puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
+  factory Negocio({String? id, Usuario? usuario, required String nombre_negocio, Barrio? barrio, required String correo, String? logo, String? banner, required String direccion, required String telefono, required TemporalDateTime creado_en, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
     return Negocio._internal(
       id: id == null ? UUID.getUUID() : id,
       usuario: usuario,
       nombre_negocio: nombre_negocio,
+      barrio: barrio,
+      correo: correo,
       logo: logo,
       banner: banner,
       direccion: direccion,
       telefono: telefono,
+      creado_en: creado_en,
       categoria: categoria,
       descripcion: descripcion,
       horario: horario,
@@ -216,10 +207,13 @@ class Negocio extends Model {
       id == other.id &&
       _usuario == other._usuario &&
       _nombre_negocio == other._nombre_negocio &&
+      _barrio == other._barrio &&
+      _correo == other._correo &&
       _logo == other._logo &&
       _banner == other._banner &&
       _direccion == other._direccion &&
       _telefono == other._telefono &&
+      _creado_en == other._creado_en &&
       _categoria == other._categoria &&
       _descripcion == other._descripcion &&
       _horario == other._horario &&
@@ -239,10 +233,13 @@ class Negocio extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("usuario=" + (_usuario != null ? _usuario!.toString() : "null") + ", ");
     buffer.write("nombre_negocio=" + "$_nombre_negocio" + ", ");
+    buffer.write("barrio=" + (_barrio != null ? _barrio!.toString() : "null") + ", ");
+    buffer.write("correo=" + "$_correo" + ", ");
     buffer.write("logo=" + "$_logo" + ", ");
     buffer.write("banner=" + "$_banner" + ", ");
     buffer.write("direccion=" + "$_direccion" + ", ");
     buffer.write("telefono=" + "$_telefono" + ", ");
+    buffer.write("creado_en=" + (_creado_en != null ? _creado_en!.format() : "null") + ", ");
     buffer.write("categoria=" + (_categoria != null ? _categoria!.toString() : "null") + ", ");
     buffer.write("descripcion=" + "$_descripcion" + ", ");
     buffer.write("horario=" + "$_horario" + ", ");
@@ -254,15 +251,18 @@ class Negocio extends Model {
     return buffer.toString();
   }
   
-  Negocio copyWith({Usuario? usuario, String? nombre_negocio, String? logo, String? banner, String? direccion, String? telefono, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
+  Negocio copyWith({Usuario? usuario, String? nombre_negocio, Barrio? barrio, String? correo, String? logo, String? banner, String? direccion, String? telefono, TemporalDateTime? creado_en, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
     return Negocio._internal(
       id: id,
       usuario: usuario ?? this.usuario,
       nombre_negocio: nombre_negocio ?? this.nombre_negocio,
+      barrio: barrio ?? this.barrio,
+      correo: correo ?? this.correo,
       logo: logo ?? this.logo,
       banner: banner ?? this.banner,
       direccion: direccion ?? this.direccion,
       telefono: telefono ?? this.telefono,
+      creado_en: creado_en ?? this.creado_en,
       categoria: categoria ?? this.categoria,
       descripcion: descripcion ?? this.descripcion,
       horario: horario ?? this.horario,
@@ -277,10 +277,15 @@ class Negocio extends Model {
         ? Usuario.fromJson(new Map<String, dynamic>.from(json['usuario']['serializedData']))
         : null,
       _nombre_negocio = json['nombre_negocio'],
+      _barrio = json['barrio']?['serializedData'] != null
+        ? Barrio.fromJson(new Map<String, dynamic>.from(json['barrio']['serializedData']))
+        : null,
+      _correo = json['correo'],
       _logo = json['logo'],
       _banner = json['banner'],
       _direccion = json['direccion'],
       _telefono = json['telefono'],
+      _creado_en = json['creado_en'] != null ? TemporalDateTime.fromString(json['creado_en']) : null,
       _categoria = json['categoria']?['serializedData'] != null
         ? Categoria.fromJson(new Map<String, dynamic>.from(json['categoria']['serializedData']))
         : null,
@@ -303,11 +308,11 @@ class Negocio extends Model {
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'usuario': _usuario?.toJson(), 'nombre_negocio': _nombre_negocio, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'categoria': _categoria?.toJson(), 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones?.map((Cupon? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'usuario': _usuario?.toJson(), 'nombre_negocio': _nombre_negocio, 'barrio': _barrio?.toJson(), 'correo': _correo, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'creado_en': _creado_en?.format(), 'categoria': _categoria?.toJson(), 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones?.map((Cupon? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'usuario': _usuario, 'nombre_negocio': _nombre_negocio, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'categoria': _categoria, 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones, 'reviews': _reviews, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id, 'usuario': _usuario, 'nombre_negocio': _nombre_negocio, 'barrio': _barrio, 'correo': _correo, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'creado_en': _creado_en, 'categoria': _categoria, 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones, 'reviews': _reviews, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryModelIdentifier<NegocioModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<NegocioModelIdentifier>();
@@ -316,10 +321,15 @@ class Negocio extends Model {
     fieldName: "usuario",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
   static final QueryField NOMBRE_NEGOCIO = QueryField(fieldName: "nombre_negocio");
+  static final QueryField BARRIO = QueryField(
+    fieldName: "barrio",
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Barrio'));
+  static final QueryField CORREO = QueryField(fieldName: "correo");
   static final QueryField LOGO = QueryField(fieldName: "logo");
   static final QueryField BANNER = QueryField(fieldName: "banner");
   static final QueryField DIRECCION = QueryField(fieldName: "direccion");
   static final QueryField TELEFONO = QueryField(fieldName: "telefono");
+  static final QueryField CREADO_EN = QueryField(fieldName: "creado_en");
   static final QueryField CATEGORIA = QueryField(
     fieldName: "categoria",
     fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Categoria'));
@@ -351,8 +361,8 @@ class Negocio extends Model {
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["usuarioID"], name: "byUsuario"),
-      ModelIndex(fields: const ["categoriaID"], name: "byCatergoria")
+      ModelIndex(fields: const ["barrioID"], name: "byBarrio"),
+      ModelIndex(fields: const ["categoriaID"], name: "byCategoria")
     ];
     
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
@@ -370,15 +380,28 @@ class Negocio extends Model {
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
+    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+      key: Negocio.BARRIO,
+      isRequired: false,
+      targetNames: ['barrioID'],
+      ofModelName: 'Barrio'
+    ));
+    
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.LOGO,
+      key: Negocio.CORREO,
       isRequired: true,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Negocio.LOGO,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Negocio.BANNER,
-      isRequired: true,
+      isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
@@ -394,6 +417,12 @@ class Negocio extends Model {
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Negocio.CREADO_EN,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+    ));
+    
     modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
       key: Negocio.CATEGORIA,
       isRequired: false,
@@ -403,19 +432,19 @@ class Negocio extends Model {
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Negocio.DESCRIPCION,
-      isRequired: true,
+      isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Negocio.HORARIO,
-      isRequired: true,
+      isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
       key: Negocio.PUNTUACION_PROMEDIO,
-      isRequired: true,
+      isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.double)
     ));
     

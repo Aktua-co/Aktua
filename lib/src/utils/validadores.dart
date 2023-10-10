@@ -25,7 +25,7 @@ String? validateArgentinianPhoneNumber(String? value) {
   final RegExp regex = RegExp(r'^\+\d{10,15}$');
 
   if (!regex.hasMatch(value)) {
-    return 'Por favor ingrese un numero de telefono valido +56123654789';
+    return 'Por favor ingrese un numero de telefono valido +57323654789';
   }
   return null;
 }

@@ -3,7 +3,7 @@ import 'package:aktua_amplify/src/auth_screens/registro/controller_registro.dart
 import 'package:aktua_amplify/src/auth_screens/login/controller_login.dart';
 import 'package:aktua_amplify/src/utils/validadores.dart';
 import 'package:get/get.dart';
-
+import 'package:aktua_amplify/src/utils/constants.dart';
 class DesktopRegistro extends StatefulWidget {
   const DesktopRegistro({ Key? key }) : super(key: key);
 
@@ -14,22 +14,32 @@ class DesktopRegistro extends StatefulWidget {
 class _DesktopRegistroState extends State<DesktopRegistro> {
   TextEditingController nombreController = TextEditingController();
   TextEditingController apellidoPaternoController = TextEditingController();
-  TextEditingController apellidoMaternoController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController claveController = TextEditingController();
   TextEditingController confirmarClaveController = TextEditingController();
   TextEditingController confirmarCodigoController = TextEditingController();
+  TextEditingController direccionController = TextEditingController();
+  TextEditingController barrioController = TextEditingController();
+  TextEditingController numeroContactoController = TextEditingController();
+  
 
   bool claveValida = false;
   bool obscureText = false;
   bool obscureText2 = false;
   bool clavesIguales = false;
   bool seEnvioCodigo = false;
+  String seleccion = "vecino";
   FocusNode claveFocusNode = FocusNode();
   
   bool isLoading = false;
   final _formKeyRegistro = GlobalKey<FormState>();
   final _formKeyCodigo = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    barrioController.text = barrios[0];
+  }
 
   Future<void> registrarce() async {
     setState(() {
@@ -92,7 +102,10 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
             saveUser(
               nombreController.text, 
               emailController.text, 
-              'vecino').then((value) => {
+              'Barrio',
+              'direccion',
+              "telefono"
+              ).then((value) => {
               Get.toNamed('/vecinos')
             }),
             
@@ -123,6 +136,32 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
 
   }
 
+Future<void> guardarRegistroUsuarioONegocio()async{
+  if(seleccion == "vecino"){
+    print("__GUARDAR VECINO___");
+    final nombreCompleto = nombreController.text + " " + apellidoPaternoController.text;
+     await saveUser(
+              nombreCompleto, 
+              emailController.text, 
+              barrioController.text,
+              direccionController.text,
+              numeroContactoController.text
+              ).then((value) => {
+              Get.toNamed('/vecinos')
+            });
+  }else{
+     print("__GUARDAR negocio___");
+    await saveNegocio(
+              nombreController.text, 
+              emailController.text, 
+              barrioController.text,
+              direccionController.text,
+              numeroContactoController.text
+              ).then((value) => {
+              Get.toNamed('/vecinos')
+            });
+  }
+}
   @override
   Widget build(BuildContext context) {
     if(!seEnvioCodigo){
@@ -163,7 +202,13 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
-                            onPressed: (){}, 
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>( seleccion == "vecino"? Theme.of(context).colorScheme.primary : Colors.grey)),
+                            onPressed: (){
+                              setState(() {
+                                seleccion = "vecino";
+                              });
+                            }, 
                             child: const Text('Soy Vecino'),),
                         ),
                       ),
@@ -171,7 +216,14 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
-                            onPressed: (){}, 
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>( seleccion == "negocio"? Theme.of(context).colorScheme.primary : Colors.grey)),
+                            
+                            onPressed: (){
+                              setState(() {
+                                seleccion = "negocio";
+                              });
+                            }, 
                             child: const Text('Tengo un Negocio'),),
                         ),
                       )
@@ -188,49 +240,35 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                         children: [
                            TextFormField(
                                       controller: nombreController,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         border: OutlineInputBorder(),
-                                        labelText: 'Nombre',
+                                        labelText: seleccion == 'vecino'? 'Nombre(s)':'Nombre del Negocio',
                                         
                                       ),
                                       validator: (value) {
                                         if (value == null ||
                                             value.isEmpty) {
-                                          return 'Ingrese su Nombre';
+                                          return 'Ingrese su(s) Nombre(s)';
                                         }
                                         return null;
                                       },
                                     ),
                                     const SizedBox(height: 10),
+                                    seleccion == "vecino"?
                                     TextFormField(
                                       controller: apellidoPaternoController,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
-                                        labelText: 'Apellido Paterno',
+                                        labelText: 'Apellido(s)',
                                       ),
                                       validator: (value) {
                                         if (value == null ||
                                             value.isEmpty) {
-                                          return 'Ingrese su Apellido Paterno';
+                                          return 'Ingrese su(s) Apellido(s)';
                                         }
                                         return null;
                                       },
-                                    ),
-                                    const SizedBox(height: 10),
-                                    TextFormField(
-                                      controller: apellidoMaternoController,
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Apellido Materno',
-                                      ),
-                                      validator: (value) {
-                                      if (value == null ||
-                                          value.isEmpty) {
-                                        return 'Ingrese su Apellido Materno';
-                                      }
-                                      return null;
-                                    },
-                                    ),
+                                    ):Container(),
                                     const SizedBox(height: 10),
                                     TextFormField(
                                       //style:TextStyle(color:Color.fromARGB(255, 20, 20, 20)),
@@ -250,6 +288,54 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                         labelText: 'Email',
                                         border: OutlineInputBorder(),
                                       ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      controller: direccionController,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Direccion',
+                                      ),
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Ingrese su Direccion';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                    DropdownButtonFormField<String>(
+                                      value: barrioController.text,
+                                      decoration: InputDecoration(
+                                        labelText: 'Barrio',
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          barrioController.text = value!;
+                                        });
+                                      },
+                                      items: barrios.map((barrio) {
+                                        return DropdownMenuItem<String>(
+                                          value: barrio,
+                                          child: Text(barrio, style: Theme.of(context).textTheme.labelSmall,),
+                                        );
+                                      }).toList(),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Seleccione un Barrio';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                            //readOnly: true,
+                                            controller:numeroContactoController,
+                                            validator: validateArgentinianPhoneNumber,
+                                            decoration: InputDecoration(
+                                              labelText: 'Telefono',
+                                            ),
                                     ),
                                     const SizedBox(height: 10),
                                     TextFormField(

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'amplifyconfiguration.dart';
 import 'package:aktua_amplify/models/ModelProvider.dart';
-import 'package:amplify_datastore/amplify_datastore.dart';
  
 void ConfigureAmplify() async {
     final api = AmplifyAPI(modelProvider: ModelProvider.instance);

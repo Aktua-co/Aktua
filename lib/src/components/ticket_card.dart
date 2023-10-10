@@ -23,44 +23,50 @@ class _TicketCardState extends State<TicketCard> {
         children: [
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Container(
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.transparent,
-              backgroundImage:NetworkImage(widget.image),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.transparent,
+            backgroundImage:NetworkImage(widget.image),
         
-              ),
             ),
         ),
-          Container(
-           // color: Colors.yellow,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  maxLines:5,
+                  widget.nombre, 
+                style:Theme.of(context).textTheme.titleLarge
+
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width < 600? 160 : MediaQuery.of(context).size.width < 1100?300:500,
                   child: Text(
                     maxLines:5,
-                    widget.nombre, 
-                  style:Theme.of(context).textTheme.titleLarge
-
+                    widget.descripcion, 
+                  style:Theme.of(context).textTheme.bodyMedium?.copyWith(color:Colors.black54)
+                
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width < 600? 160 : MediaQuery.of(context).size.width < 1100?300:500,
-                    child: Text(
-                      maxLines:5,
-                      widget.descripcion, 
-                    style:Theme.of(context).textTheme.bodyMedium?.copyWith(color:Colors.black54)
-                  
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Container(
+                color: Colors.amber,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                  Container(),
+                  ElevatedButton(onPressed: () {  },
+                  child: Text("Tomar"))
+                ]),
+              )
+            ],
           )
       ],
       ),

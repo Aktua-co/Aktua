@@ -31,7 +31,9 @@ class Barrio extends Model {
   static const classType = const _BarrioModelType();
   final String id;
   final String? _nombre;
-  final List<Vecino>? _vecinos;
+  final List<Usuario>? _vecinos;
+  final List<Negocio>? _negocios;
+  final TemporalDateTime? _creado_en;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -61,8 +63,25 @@ class Barrio extends Model {
     }
   }
   
-  List<Vecino>? get vecinos {
+  List<Usuario>? get vecinos {
     return _vecinos;
+  }
+  
+  List<Negocio>? get negocios {
+    return _negocios;
+  }
+  
+  TemporalDateTime get creado_en {
+    try {
+      return _creado_en!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
   }
   
   TemporalDateTime? get createdAt {
@@ -73,13 +92,15 @@ class Barrio extends Model {
     return _updatedAt;
   }
   
-  const Barrio._internal({required this.id, required nombre, vecinos, createdAt, updatedAt}): _nombre = nombre, _vecinos = vecinos, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Barrio._internal({required this.id, required nombre, vecinos, negocios, required creado_en, createdAt, updatedAt}): _nombre = nombre, _vecinos = vecinos, _negocios = negocios, _creado_en = creado_en, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Barrio({String? id, required String nombre, List<Vecino>? vecinos}) {
+  factory Barrio({String? id, required String nombre, List<Usuario>? vecinos, List<Negocio>? negocios, required TemporalDateTime creado_en}) {
     return Barrio._internal(
       id: id == null ? UUID.getUUID() : id,
       nombre: nombre,
-      vecinos: vecinos != null ? List<Vecino>.unmodifiable(vecinos) : vecinos);
+      vecinos: vecinos != null ? List<Usuario>.unmodifiable(vecinos) : vecinos,
+      negocios: negocios != null ? List<Negocio>.unmodifiable(negocios) : negocios,
+      creado_en: creado_en);
   }
   
   bool equals(Object other) {
@@ -92,7 +113,9 @@ class Barrio extends Model {
     return other is Barrio &&
       id == other.id &&
       _nombre == other._nombre &&
-      DeepCollectionEquality().equals(_vecinos, other._vecinos);
+      DeepCollectionEquality().equals(_vecinos, other._vecinos) &&
+      DeepCollectionEquality().equals(_negocios, other._negocios) &&
+      _creado_en == other._creado_en;
   }
   
   @override
@@ -105,6 +128,7 @@ class Barrio extends Model {
     buffer.write("Barrio {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("nombre=" + "$_nombre" + ", ");
+    buffer.write("creado_en=" + (_creado_en != null ? _creado_en!.format() : "null") + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -112,11 +136,13 @@ class Barrio extends Model {
     return buffer.toString();
   }
   
-  Barrio copyWith({String? nombre, List<Vecino>? vecinos}) {
+  Barrio copyWith({String? nombre, List<Usuario>? vecinos, List<Negocio>? negocios, TemporalDateTime? creado_en}) {
     return Barrio._internal(
       id: id,
       nombre: nombre ?? this.nombre,
-      vecinos: vecinos ?? this.vecinos);
+      vecinos: vecinos ?? this.vecinos,
+      negocios: negocios ?? this.negocios,
+      creado_en: creado_en ?? this.creado_en);
   }
   
   Barrio.fromJson(Map<String, dynamic> json)  
@@ -125,18 +151,25 @@ class Barrio extends Model {
       _vecinos = json['vecinos'] is List
         ? (json['vecinos'] as List)
           .where((e) => e?['serializedData'] != null)
-          .map((e) => Vecino.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
+          .map((e) => Usuario.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
+      _negocios = json['negocios'] is List
+        ? (json['negocios'] as List)
+          .where((e) => e?['serializedData'] != null)
+          .map((e) => Negocio.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
+          .toList()
+        : null,
+      _creado_en = json['creado_en'] != null ? TemporalDateTime.fromString(json['creado_en']) : null,
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'nombre': _nombre, 'vecinos': _vecinos?.map((Vecino? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'nombre': _nombre, 'vecinos': _vecinos?.map((Usuario? e) => e?.toJson()).toList(), 'negocios': _negocios?.map((Negocio? e) => e?.toJson()).toList(), 'creado_en': _creado_en?.format(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'nombre': _nombre, 'vecinos': _vecinos, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id, 'nombre': _nombre, 'vecinos': _vecinos, 'negocios': _negocios, 'creado_en': _creado_en, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryModelIdentifier<BarrioModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<BarrioModelIdentifier>();
@@ -144,7 +177,11 @@ class Barrio extends Model {
   static final QueryField NOMBRE = QueryField(fieldName: "nombre");
   static final QueryField VECINOS = QueryField(
     fieldName: "vecinos",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Vecino'));
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
+  static final QueryField NEGOCIOS = QueryField(
+    fieldName: "negocios",
+    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Negocio'));
+  static final QueryField CREADO_EN = QueryField(fieldName: "creado_en");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Barrio";
     modelSchemaDefinition.pluralName = "Barrios";
@@ -182,8 +219,21 @@ class Barrio extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
       key: Barrio.VECINOS,
       isRequired: false,
-      ofModelName: 'Vecino',
-      associatedKey: Vecino.BARRIO
+      ofModelName: 'Usuario',
+      associatedKey: Usuario.BARRIO
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+      key: Barrio.NEGOCIOS,
+      isRequired: false,
+      ofModelName: 'Negocio',
+      associatedKey: Negocio.BARRIO
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Barrio.CREADO_EN,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
