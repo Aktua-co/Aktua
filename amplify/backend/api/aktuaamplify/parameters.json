@@ -1,10 +1,10 @@
 {
-  "AppSyncApiName": "aktua",
+  "AppSyncApiName": "aktuaamplify",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
-      "authaktuaf437c47c",
+      "authaktuaamplify394be7b6394be7b6",
       "Outputs.UserPoolId"
     ]
   }

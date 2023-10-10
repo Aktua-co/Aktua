@@ -80,7 +80,7 @@ final _formKeyCustomChallenge = GlobalKey<FormState>();
           ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -192,6 +192,19 @@ final _formKeyCustomChallenge = GlobalKey<FormState>();
                                       },
                                       child: Text('Ingresar'),
                                     ),
+                              Expanded(child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                  Center(child: Text("¿No tienes una cuenta?"),),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/registro');
+                                  },
+                                  child: Text('Registrate'),
+                                )
+
+                                ]),)
                             ],
                           ),
                         ),)

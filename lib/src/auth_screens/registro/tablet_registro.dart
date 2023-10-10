@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:aktua_amplify/src/auth_screens/registro/controller_registro.dart';
 import 'package:aktua_amplify/src/utils/validadores.dart';
+import 'package:get/get.dart';
 
 class TabletRegistro extends StatefulWidget {
   const TabletRegistro({Key? key}) : super(key: key);
@@ -341,6 +342,19 @@ class _TabletRegistroState extends State<TabletRegistro> {
                                   },
                                   child: Text('Registrarse'),
                                 ),
+                              Expanded(child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                  Center(child: Text("¿No tienes una cuenta?"),),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/login');
+                                  },
+                                  child: Text('Inicia Session'),
+                                )
+
+                                ]),)
                               ],
                             ))
                         : Center(

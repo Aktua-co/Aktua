@@ -5,11 +5,17 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'amplifyconfiguration.dart';
+import 'package:aktua_amplify/models/ModelProvider.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
  
 void ConfigureAmplify() async {
+    final api = AmplifyAPI(modelProvider: ModelProvider.instance);
+    //final datastorePlugin =  AmplifyDataStore(modelProvider: ModelProvider.instance);
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
-      await Amplify.addPlugin(AmplifyAPI());
+      //await Amplify.addPlugin(AmplifyAPI());
+      //await Amplify.addPlugin(datastorePlugin);
+      await Amplify.addPlugin(api);
       await Amplify.configure(amplifyconfig);
       safePrint('Successfully configured');
     } on Exception catch (e) {

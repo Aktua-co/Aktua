@@ -10,9 +10,9 @@ const DesktopDirectorio({ Key? key, required this.cards }) : super(key: key);
   Widget build(BuildContext context){
         return Scaffold(
           endDrawer:DesktopNavbar(),
-        appBar:AppBar(
-          title:const Text("Aktua"),
-        ),
+          appBar:AppBar(
+            title:const Text("Aktua"),
+          ),
           body:ListView.builder(
         itemCount: cards.length,
         itemBuilder: (context, index) {

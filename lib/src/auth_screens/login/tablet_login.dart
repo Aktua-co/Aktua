@@ -193,6 +193,19 @@ Future<void> login()async{
                                       },
                                       child: Text('Ingresar'),
                                     ),
+                              Expanded(child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                  Center(child: Text("¿No tienes una cuenta?"),),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/registro');
+                                  },
+                                  child: Text('Registrate'),
+                                )
+
+                                ]),)
                             ],
                           ),
                         ),)

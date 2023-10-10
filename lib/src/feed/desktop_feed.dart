@@ -43,10 +43,6 @@ int _selectedIndex = 0;
       break;
     }
     return Scaffold(
-     endDrawer:DesktopNavbar(),
-        appBar:AppBar(
-          title:const Text("Aktua"),
-        ),
       body:body,
      // bottomNavigationBar: ButtomNavigationBar(pageIndex),
 

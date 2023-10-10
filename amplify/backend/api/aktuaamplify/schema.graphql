@@ -1,11 +1,18 @@
 # ////ONLY TO GETT STARTED
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
-type Usuario @model @auth(rules: [{ allow: owner }]) {
+type Usuario @model
+  @auth(
+    rules: [
+      # Allow anyone to create a user (registration)
+      { allow: public, operations: [create] },
+      # Allow owners to read, update, and delete their own user
+      { allow: owner, operations: [read, update, delete] }
+    ]
+  ) {
   id: ID!
   nombre: String!
   correo: String!
-  contrasena: String!
   tipo_usuario: String!
   creado_en: AWSDateTime!
   vecino: Vecino @hasOne

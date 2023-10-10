@@ -1,22 +1,26 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-aktua-dev-121308-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktua-dev-121308-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktua-dev-121308-authRole",
+      "AuthRoleName": "amplify-aktuaamplify-dev-205703-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-205703-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-205703-authRole",
       "Region": "sa-east-1",
-      "DeploymentBucketName": "amplify-aktua-dev-121308-deployment",
-      "UnauthRoleName": "amplify-aktua-dev-121308-unauthRole",
-      "StackName": "amplify-aktua-dev-121308",
-      "StackId": "arn:aws:cloudformation:sa-east-1:537625335431:stack/amplify-aktua-dev-121308/8d5f6720-4fec-11ee-b679-067bde059f1e",
-      "AmplifyAppId": "dyhhk5dsp6uu9"
+      "DeploymentBucketName": "amplify-aktuaamplify-dev-205703-deployment",
+      "UnauthRoleName": "amplify-aktuaamplify-dev-205703-unauthRole",
+      "StackName": "amplify-aktuaamplify-dev-205703",
+      "StackId": "arn:aws:cloudformation:sa-east-1:537625335431:stack/amplify-aktuaamplify-dev-205703/3ac2a720-656d-11ee-b7a4-068d22ad7996",
+      "AmplifyAppId": "d1q2ygfbhhq7tb"
     },
     "categories": {
       "auth": {
-        "aktuaf437c47c": {}
+        "aktuaamplify394be7b6394be7b6": {
+          "facebookAppId": "1350765928885095",
+          "googleClientId": "941259870408-9e26ikf3p1jgbslbtoisohdo16nfdg1k.apps.googleusercontent.com"
+        },
+        "userPoolGroups": {}
       },
       "api": {
-        "aktua": {}
+        "aktuaamplify": {}
       }
     }
   }

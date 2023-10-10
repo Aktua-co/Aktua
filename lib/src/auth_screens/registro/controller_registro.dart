@@ -1,7 +1,11 @@
 /// Signs a user up with a username, password, and email. The required
 /// attributes may be different depending on your app's configuration.
 /// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:aktua_amplify/models/ModelProvider.dart';
+import 'package:amplify_api/amplify_api.dart';
+import '../../../amplifyconfiguration.dart';
 
 class AuthResponse {
   final String? code;
@@ -80,5 +84,37 @@ Future<AuthResponse> confirmUser({
   } on AuthException catch (e) {
     safePrint('Error confirmado al usuario: ${e.message}');
     return AuthResponse(code: 'Error', message: 'Error confirmando al usuario: ${e.message}');
+  }
+}
+
+
+Future<void> saveUser(
+  String nombre,
+  String correo,
+  String tipoUsuario,
+
+) async {
+  final newUser = Usuario(
+    nombre: nombre,
+    correo: correo,
+    tipo_usuario: tipoUsuario,
+    creado_en: TemporalDateTime.now(),
+    
+  );
+
+  try {
+    final request = ModelMutations.create(
+      newUser,
+      authorizationMode: APIAuthorizationType.apiKey,
+      );
+    final res = await Amplify.API.mutate(request: request).response;
+    final resData = res.data;
+    if (resData == null) {
+      safePrint('errors: ${res.errors}');
+      return;
+    }
+    safePrint('Mutation result: ${resData.toJson()}');
+  } on DataStoreException catch (e) {
+    safePrint('Something went wrong saving model: ${e.message}');
   }
 }

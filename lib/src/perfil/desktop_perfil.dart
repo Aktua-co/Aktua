@@ -44,7 +44,10 @@ final int pageIndex = 2;
        print("((USER))");
        userProvider = Provider.of<UserProvider>(context, listen: false);
        userProvider.fetchUserAttributes().then((value) => {
-        print(userProvider.userAttributes['email'])
+        print(userProvider.userAttributes['email']),
+        emailController.text = userProvider.userAttributes['email']!,
+        nombreController.text = userProvider.userAttributes['name']!,
+        apellidoPaternoController.text = userProvider.userAttributes['custom:apellido_paterno']!,
 
        });
 

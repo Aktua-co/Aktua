@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:aktua_amplify/src/auth_screens/registro/controller_registro.dart';
+import 'package:aktua_amplify/src/auth_screens/login/controller_login.dart';
 import 'package:aktua_amplify/src/utils/validadores.dart';
-import 'package:aktua_amplify/src/auth_screens/login/responsive_login.dart';
+import 'package:get/get.dart';
+
 class DesktopRegistro extends StatefulWidget {
   const DesktopRegistro({ Key? key }) : super(key: key);
 
@@ -59,15 +61,16 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(registroResponse.message!),
-          duration: Duration(seconds: 8),
+          duration: const Duration(seconds: 8),
         )
       );
   }
-
+//TODO: Agregar tipo de usiario al formulario
   Future<void> confirmar() async {
     setState(() {
           isLoading = true;
         });
+
     print('Confirmar');
     final confirmacionResponse = await confirmUser(
       username: emailController.text,
@@ -80,11 +83,31 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
           isLoading = false;
           seEnvioCodigo = false;
         });
-         Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ResponsiveLogin()),
-          );
-          
+        await signInUser(emailController.text, claveController.text).then((value) => {
+
+          if (value.code == "Success") {
+            setState(() {
+              isLoading = false;
+            }),
+            saveUser(
+              nombreController.text, 
+              emailController.text, 
+              'vecino').then((value) => {
+              Get.toNamed('/vecinos')
+            }),
+            
+            
+          } else {
+            setState(() {
+              isLoading = false;
+            })
+          }
+         
+
+        },);
+         
+         Get.toNamed('/Login');
+ 
       }else{
          setState(() {
           isLoading = false;
@@ -94,7 +117,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(confirmacionResponse.message!),
-          duration: Duration(seconds: 8),
+          duration: const Duration(seconds: 8),
         )
       );
 
@@ -105,23 +128,22 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
     if(!seEnvioCodigo){
       return Scaffold(
       body: Container(
-           decoration: BoxDecoration(
+           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/assets/images/bienvenida_1.png'), // Replace with your image path
               fit: BoxFit.cover,
             ),
           ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical:80, horizontal:300),
-            child: Card(
+        child: Row(children: [
+          Expanded(child: Container()),
+          Expanded(child: Card(
               //color: Colors.pink,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   
                   children: [
-                    Column(
+                    const Column(
                       children: [
                         SizedBox(
                       width: 80,
@@ -142,7 +164,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             onPressed: (){}, 
-                            child: Text('Soy Vecino'),),
+                            child: const Text('Soy Vecino'),),
                         ),
                       ),
                       Expanded(
@@ -150,7 +172,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             onPressed: (){}, 
-                            child: Text('Tengo un Negocio'),),
+                            child: const Text('Tengo un Negocio'),),
                         ),
                       )
                     ],
@@ -163,11 +185,10 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                       child:  Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.min,
                         children: [
                            TextFormField(
                                       controller: nombreController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: 'Nombre',
                                         
@@ -180,10 +201,10 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       controller: apellidoPaternoController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: 'Apellido Paterno',
                                       ),
@@ -195,10 +216,10 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       controller: apellidoMaternoController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
                                         labelText: 'Apellido Materno',
                                       ),
@@ -210,7 +231,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                       return null;
                                     },
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       //style:TextStyle(color:Color.fromARGB(255, 20, 20, 20)),
                                       controller: emailController,
@@ -224,13 +245,13 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                         }
                                         return null; // Return null if the value is valid
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: 'Ingrese su Email',
                                         labelText: 'Email',
                                         border: OutlineInputBorder(),
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       textDirection: TextDirection.ltr,
                                       controller: claveController,
@@ -242,7 +263,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                       },
                                       decoration: InputDecoration(
                                       errorMaxLines: 2,
-                                      hintStyle:TextStyle(color:Colors.amber,),
+                                      hintStyle:const TextStyle(color:Colors.amber,),
                                       suffixIcon: IconButton(
                                             icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
                                             onPressed: () {
@@ -251,7 +272,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                               });
                                             },
                                           ),
-                                        border: OutlineInputBorder(
+                                        border: const OutlineInputBorder(
                                           borderSide: BorderSide(),
                                         ),
                                          focusedBorder: OutlineInputBorder(
@@ -260,7 +281,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                           ),
                                         ),
                                         labelText: 'Contraseña',
-                                        helperStyle: TextStyle(
+                                        helperStyle: const TextStyle(
                                           overflow: TextOverflow.clip,
                                           
                                         ),
@@ -288,7 +309,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                       return null;
                                       },
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       enabled:claveValida?true:false,
                                       controller: confirmarClaveController,
@@ -301,7 +322,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                               });
                                       },
                                       decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
+                                        border: const OutlineInputBorder(),
                                          focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: clavesIguales || confirmarClaveController.text.isEmpty? Colors.green : Colors.red,
@@ -331,33 +352,46 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                       return null;
                                       },
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     ElevatedButton(
                                       onPressed: (){
                                           if (_formKeyRegistro.currentState!.validate()) {
                                             registrarce();
                                           }
                                       },
-                                      child: Text('Registrarse'),
+                                      child: const Text('Registrarse'),
                                     ),
+                                    Expanded(child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                  const Center(child: Text("¿No tienes una cuenta?"),),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/login');
+                                  },
+                                  child: const Text('Inicia Session'),
+                                )
+
+                                ]),)
                         ],
                       )
                       )
                       :
-                      Center(child: CircularProgressIndicator(),)
+                      const Center(child: CircularProgressIndicator(),)
                       ,
                     )
                 ]),
               ),
-            ),
-          ),
-        ),
+            ),),
+            Expanded(child: Container(),)
+        ]),
       )
     );
     }else{
        return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/assets/images/bienvenida_1.png'), // Replace with your image path
               fit: BoxFit.cover,
@@ -373,7 +407,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                 child: Column(
                   
                   children: [
-                        Column(
+                        const Column(
                       children: [
                         SizedBox(
                       width: 80,
@@ -400,7 +434,7 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                             child: TextFormField(
                                 controller: confirmarCodigoController,
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: 'Codigo de seguridad',
                                   
@@ -425,13 +459,13 @@ class _DesktopRegistroState extends State<DesktopRegistro> {
                                     confirmar();
                                   }
                               },
-                              child: Text('Validar codigo'),
+                              child: const Text('Validar codigo'),
                             ),
                           ),
                       ]),
                     )
                     :
-                    Center(child: CircularProgressIndicator(),)
+                    const Center(child: CircularProgressIndicator(),)
                     ,
                     )
                 ]),

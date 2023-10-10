@@ -1,20 +1,27 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "aktua": {
+    "aktuaamplify": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "aktuaf437c47c": {
+    "aktuaamplify394be7b6394be7b6": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "FacebookWebClient": "string",
+      "GoogleWebClient": "string",
+      "HostedUIDomain": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
+      "OAuthMetadata": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "aktuaUsergroupsGroupRole": "string"
     }
   }
 }

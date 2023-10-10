@@ -114,8 +114,12 @@ class _DesktopLoginState extends State<DesktopLogin> {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 300, vertical: 50),
-            child: Card(
+            padding: const EdgeInsets.all(18.0),
+            child: Row(children: [
+              Expanded(
+                child: Container(),
+              ),
+              Expanded(child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(children: [
@@ -248,14 +252,31 @@ class _DesktopLoginState extends State<DesktopLogin> {
                                   },
                                   child: Text('Ingresar'),
                                 ),
+                                Expanded(child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                  Center(child: Text("¿No tienes una cuenta?"),),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/registro');
+                                  },
+                                  child: Text('Registrate'),
+                                )
+
+                                ]),)
                               ],
                             ),
                           ),
                   )
                 ]),
               ),
-            ),
-          ),
+            ),),
+            Expanded(
+                child: Container(),
+              ),
+            ],),
+          )
         ),
       ));
     } else {
