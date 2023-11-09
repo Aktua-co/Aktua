@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:aktua_amplify/src/auth_screens/registro/controller_registro.dart';
 import 'package:aktua_amplify/src/utils/validadores.dart';
+import 'package:aktua_amplify/src/auth_screens/login/controller_login.dart';
 import 'package:get/get.dart';
+import 'package:aktua_amplify/src/utils/constants.dart';
 
 class MobileRegistro extends StatefulWidget {
   const MobileRegistro({Key? key}) : super(key: key);
@@ -11,84 +13,158 @@ class MobileRegistro extends StatefulWidget {
 }
 
 class _MobileRegistroState extends State<MobileRegistro> {
-  TextEditingController nombreController = TextEditingController();
+   TextEditingController nombreController = TextEditingController();
   TextEditingController apellidoPaternoController = TextEditingController();
-  TextEditingController apellidoMaternoController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController claveController = TextEditingController();
   TextEditingController confirmarClaveController = TextEditingController();
   TextEditingController confirmarCodigoController = TextEditingController();
+  TextEditingController direccionController = TextEditingController();
+  TextEditingController barrioController = TextEditingController();
+  TextEditingController numeroContactoController = TextEditingController();
+  TextEditingController apellidoMaternoController = TextEditingController();
 
   bool claveValida = false;
   bool obscureText = false;
   bool obscureText2 = false;
   bool clavesIguales = false;
   bool seEnvioCodigo = false;
+  String seleccion = "vecino";
   FocusNode claveFocusNode = FocusNode();
 
   bool isLoading = false;
   final _formKeyRegistro = GlobalKey<FormState>();
   final _formKeyCodigo = GlobalKey<FormState>();
 
+@override
+  void initState() {
+    super.initState();
+    barrioController.text = barrios[0];
+  }
+ 
   Future<void> registrarce() async {
     setState(() {
-      isLoading = true;
-    });
+          isLoading = true;
+        });
     print('Registrando');
     final registroResponse = await signUpUser(
-        username: nombreController.text,
-        familyName: apellidoPaternoController.text,
-        password: claveController.text,
-        email: emailController.text);
-    print("registroResponse.code");
-    print(registroResponse.code);
-    print(registroResponse.message);
+      username: nombreController.text, 
+      familyName: apellidoPaternoController.text,
+      password: claveController.text, 
+      email: emailController.text
+      );
+      print("registroResponse.code");
+      print(registroResponse.code);
+      print(registroResponse.message);
 
-    if (registroResponse.code == "CodeSent") {
-      setState(() {
-        isLoading = false;
-        seEnvioCodigo = true;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-        seEnvioCodigo = false;
-      });
-    }
+      if(registroResponse.code == "CodeSent"){
+        setState(() {
+          isLoading = false;
+          seEnvioCodigo = true;
+        });
+      }else{
+         setState(() {
+          isLoading = false;
+          seEnvioCodigo = false;
+        });
+      }
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(registroResponse.message!),
-      duration: Duration(seconds: 8),
-    ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(registroResponse.message!),
+          duration: const Duration(seconds: 8),
+        )
+      );
   }
-
+//TODO: Agregar tipo de usiario al formulario
   Future<void> confirmar() async {
     setState(() {
-      isLoading = true;
-    });
+          isLoading = true;
+        });
+
     print('Confirmar');
     final confirmacionResponse = await confirmUser(
-        username: emailController.text,
-        confirmationCode: confirmarCodigoController.text);
+      username: emailController.text,
+      confirmationCode: confirmarCodigoController.text
+    );
     print(confirmacionResponse);
 
-    if (confirmacionResponse.code == "Success") {
-      setState(() {
-        isLoading = false;
-        seEnvioCodigo = false;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-    }
+    if(confirmacionResponse.code == "Success"){
+        setState(() {
+          isLoading = false;
+          seEnvioCodigo = false;
+        });
+        await signInUser(emailController.text, claveController.text).then((value) => {
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(confirmacionResponse.message!),
-      duration: Duration(seconds: 8),
-    ));
+          if (value.code == "Success") {
+            setState(() {
+              isLoading = false;
+            }),
+            saveUser(
+              nombreController.text, 
+              emailController.text, 
+              'Barrio',
+              'direccion',
+              "telefono"
+              ).then((value) => {
+              Get.toNamed('/feed')
+            }),
+            
+            
+          } else {
+            setState(() {
+              isLoading = false;
+            })
+          }
+         
+
+        },);
+         
+         Get.toNamed('/Login');
+ 
+      }else{
+         setState(() {
+          isLoading = false;
+        });
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(confirmacionResponse.message!),
+          duration: const Duration(seconds: 8),
+        )
+      );
+
   }
 
+Future<void> guardarRegistroUsuarioONegocio()async{
+  if(seleccion == "vecino"){
+    print("__GUARDAR VECINO___");
+    final nombreCompleto = nombreController.text + " " + apellidoPaternoController.text;
+     await saveUser(
+              nombreCompleto, 
+              emailController.text, 
+              barrioController.text,
+              direccionController.text,
+              numeroContactoController.text
+              ).then((value) => {
+              Get.toNamed('/feed')
+            });
+  }else{
+     print("__GUARDAR negocio___");
+    await saveNegocio(
+              nombreController.text, 
+              emailController.text, 
+              barrioController.text,
+              direccionController.text,
+              numeroContactoController.text
+              ).then((value) => {
+              Get.toNamed('/feed')
+            });
+  }
+}
+  
+  
   ScrollController _scrollController = ScrollController();
 
   @override
@@ -103,288 +179,312 @@ class _MobileRegistroState extends State<MobileRegistro> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  const SizedBox(
-                      width: 50,
-                      child: Image(
-                          image:
-                              AssetImage('lib/assets/images/logo_aktua.png'))),
-                  SizedBox(height: 20),
-                  const Text(
-                    'Registro',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const Text(
-                    'Por favor ingresa tus datos ',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text('Soy Vecino'),
-                          ),
-                        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(children: [
+                const SizedBox(
+                    width: 50,
+                    child: Image(
+                        image:
+                            AssetImage('lib/assets/images/logo_aktua.png'))),
+                SizedBox(height: 20),
+                const Text(
+                  'Registro',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Por favor ingresa tus datos ',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                     Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>( seleccion == "vecino"? Theme.of(context).colorScheme.primary : Colors.grey)),
+                          onPressed: (){
+                            setState(() {
+                              seleccion = "vecino";
+                            });
+                          }, 
+                          child: const Text('Soy Vecino'),),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text('Tengo un Negocio'),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: !isLoading
-                        ? Form(
-                            key: _formKeyRegistro,
-                            child: Scrollbar(
-                              controller: _scrollController,
-                              thumbVisibility: true,
-                              child: ListView(
-                                controller: _scrollController,
-                                physics: AlwaysScrollableScrollPhysics(),
-                                //crossAxisAlignment: CrossAxisAlignment.center,
-                                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                //mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  TextFormField(
-                                    controller: nombreController,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Nombre',
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>( seleccion == "negocio"? Theme.of(context).colorScheme.primary : Colors.grey)),
+                          
+                          onPressed: (){
+                            setState(() {
+                              seleccion = "negocio";
+                            });
+                          }, 
+                          child: const Text('Tengo un Negocio'),),
+                      ),
+                    )
+                  ],
+                ),
+                Expanded(
+                  flex: 5,
+                  child: !isLoading
+                      ? Form(
+                    key: _formKeyRegistro,
+                    child:  Scrollbar(
+                      trackVisibility: true,
+                        thumbVisibility: true,
+                      child: ListView(
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                           TextFormField(
+                                      controller: nombreController,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: seleccion == 'vecino'? 'Nombre(s)':'Nombre del Negocio',
+                                        
+                                      ),
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Ingrese su(s) Nombre(s)';
+                                        }
+                                        return null;
+                                      },
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Ingrese su Nombre';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: apellidoPaternoController,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Apellido Paterno',
+                                    const SizedBox(height: 10),
+                                    seleccion == "vecino"?
+                                    TextFormField(
+                                      controller: apellidoPaternoController,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Apellido(s)',
+                                      ),
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Ingrese su(s) Apellido(s)';
+                                        }
+                                        return null;
+                                      },
+                                    ):Container(),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      //style:TextStyle(color:Color.fromARGB(255, 20, 20, 20)),
+                                      controller: emailController,
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Ingrese su Email';
+                                        }
+                                        if (!validateEmail(value)) {
+                                          return 'Email Invalido: "ejemplo@dominio.com"';
+                                        }
+                                        return null; // Return null if the value is valid
+                                      },
+                                      decoration: const InputDecoration(
+                                        hintText: 'Ingrese su Email',
+                                        labelText: 'Email',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Ingrese su Apellido Paterno';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: apellidoMaternoController,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Apellido Materno',
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      controller: direccionController,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Direccion',
+                                      ),
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty) {
+                                          return 'Ingrese su Direccion';
+                                        }
+                                        return null;
+                                      },
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Ingrese su Apellido Materno';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 10),
-                                  TextFormField(
-                                    //style:TextStyle(color:Color.fromARGB(255, 20, 20, 20)),
-                                    controller: emailController,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Ingrese su Email';
-                                      }
-                                      if (!validateEmail(value)) {
-                                        return 'Email Invalido: "ejemplo@dominio.com"';
-                                      }
-                                      return null; // Return null if the value is valid
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingrese su Email',
-                                      labelText: 'Email',
-                                      border: OutlineInputBorder(),
+                                    const SizedBox(height: 10),
+                                    DropdownButtonFormField<String>(
+                                      value: barrioController.text,
+                                      decoration: InputDecoration(
+                                        labelText: 'Barrio',
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          barrioController.text = value!;
+                                        });
+                                      },
+                                      items: barrios.map((barrio) {
+                                        return DropdownMenuItem<String>(
+                                          value: barrio,
+                                          child: Text(barrio, style: Theme.of(context).textTheme.labelSmall,),
+                                        );
+                                      }).toList(),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Seleccione un Barrio';
+                                        }
+                                        return null;
+                                      },
                                     ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  TextFormField(
-                                    textDirection: TextDirection.ltr,
-                                    controller: claveController,
-                                    onChanged: (value) {
-                                      final isValid = validatePassword(value);
-                                      setState(() {
-                                        claveValida = isValid;
-                                      });
-                                    },
-                                    decoration: InputDecoration(
-                                        errorMaxLines: 2,
-                                        hintStyle: TextStyle(
-                                          color: Colors.amber,
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(obscureText
-                                              ? Icons.visibility_off
-                                              : Icons.visibility),
-                                          onPressed: () {
-                                            setState(() {
-                                              obscureText = !obscureText;
-                                            });
-                                          },
-                                        ),
-                                        border: OutlineInputBorder(
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                            //readOnly: true,
+                                            controller:numeroContactoController,
+                                            validator: validateArgentinianPhoneNumber,
+                                            decoration: InputDecoration(
+                                              labelText: 'Telefono',
+                                            ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      textDirection: TextDirection.ltr,
+                                      controller: claveController,
+                                      onChanged: (value) {
+                                         final isValid = validatePassword(value);
+                                              setState(() {
+                                                claveValida = isValid;
+                                              });
+                                      },
+                                      decoration: InputDecoration(
+                                      errorMaxLines: 2,
+                                      hintStyle:const TextStyle(color:Colors.amber,),
+                                      suffixIcon: IconButton(
+                                            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
+                                            onPressed: () {
+                                              setState(() {
+                                                obscureText = !obscureText;
+                                              });
+                                            },
+                                          ),
+                                        border: const OutlineInputBorder(
                                           borderSide: BorderSide(),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
+                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: claveValida ||
-                                                    claveController.text.isEmpty
-                                                ? Colors.green
-                                                : Colors.red,
+                                            color: claveValida || claveController.text.isEmpty? Colors.green : Colors.red,
                                           ),
                                         ),
                                         labelText: 'Contraseña',
-                                        helperStyle: TextStyle(
+                                        helperStyle: const TextStyle(
                                           overflow: TextOverflow.clip,
+                                          
                                         ),
-                                        helperText: claveValida ||
-                                                claveController.text.isEmpty
-                                            ? ''
-                                            : 'La contraseña debe tener al menos 8 caracteres, mayusculas, un numero y un simbolo'),
-                                    obscureText: obscureText,
-                                    onTap: () {
-                                      setState(() {
-                                        claveFocusNode.requestFocus();
-                                      });
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
+                                        helperText: claveValida || claveController.text.isEmpty?'' : 'La contraseña debe tener al menos 8 caracteres, mayusculas, un numero y un simbolo'
+                                      ),
+                                      obscureText: obscureText,
+                                       onTap: () {
+                                        setState(() {
+                                          claveFocusNode.requestFocus();
+                                        });
+                                      },
+                                      validator: (value){
+                                        if (value == null ||
+                                          value.isEmpty) {
                                         return 'Debe ingresar una contraseña';
                                       }
                                       final isValid = validatePassword(value);
                                       if (!isValid) {
                                         return 'La contraseña debe tener al menos 8 caracteres, mayusculas, un numero y un simbolo';
-                                      } else {
+                                      }else{
                                         setState(() {
                                           claveValida = true;
                                         });
                                       }
                                       return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 10),
-                                  TextFormField(
-                                    enabled: claveValida ? true : false,
-                                    controller: confirmarClaveController,
-                                    onChanged: (value) {
-                                      final isValid =
-                                          confirmarClaveController.text ==
-                                              claveController.text;
-                                      print(confirmarClaveController.text);
-                                      print(claveController.text);
-                                      setState(() {
-                                        clavesIguales = isValid;
-                                      });
-                                    },
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: clavesIguales ||
-                                                  confirmarClaveController
-                                                      .text.isEmpty
-                                              ? Colors.green
-                                              : Colors.red,
-                                        ),
-                                      ),
-                                      labelStyle: TextStyle(
-                                          color: claveValida
-                                              ? Colors.black
-                                              : Colors.grey),
-                                      labelText: 'Confirmar Contraseña',
-                                      suffixIcon: IconButton(
-                                        icon: Icon(obscureText2
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                        onPressed: () {
-                                          setState(() {
-                                            obscureText2 = !obscureText2;
-                                          });
-                                        },
-                                      ),
+                                      },
                                     ),
-                                    obscureText: obscureText2,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      enabled:claveValida?true:false,
+                                      controller: confirmarClaveController,
+                                      onChanged: (value) {
+                                         final isValid = confirmarClaveController.text == claveController.text;
+                                         print(confirmarClaveController.text);
+                                         print(claveController.text);
+                                              setState(() {
+                                                clavesIguales = isValid;
+                                              });
+                                      },
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                         focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: clavesIguales || confirmarClaveController.text.isEmpty? Colors.green : Colors.red,
+                                          ),
+                                        ),
+                                        labelStyle: TextStyle(color: claveValida?Colors.black:Colors.grey),
+                                        labelText: 'Confirmar Contraseña',
+                                        suffixIcon: IconButton(
+                                            icon: Icon(obscureText2 ? Icons.visibility_off : Icons.visibility),
+                                            onPressed: () {
+                                              setState(() {
+                                                obscureText2 = !obscureText2;
+                                              });
+                                            },
+                                          ),
+                                      ),
+                                      obscureText: obscureText2,
+                                      validator: (value){
+                                        if (value == null ||
+                                          value.isEmpty) {
                                         return 'Debe ingresar la misma contraseña';
                                       }
-                                      final isValid = claveController.text ==
-                                          confirmarClaveController.text;
+                                      final isValid = claveController.text == confirmarClaveController.text;
                                       if (!isValid) {
                                         return 'Las contraseñas deben coincidir';
                                       }
                                       return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 10),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      if (_formKeyRegistro.currentState!
-                                          .validate()) {
-                                        registrarce();
-                                      }
-                                    },
-                                    child: Text('Registrarse'),
-                                  ),
-                                  SizedBox(height: 30),
-                                  Expanded(
-                                    flex:1,
-                                    child: 
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                    ElevatedButton(
+                                      onPressed: (){
+                                          if (_formKeyRegistro.currentState!.validate()) {
+                                            registrarce();
+                                          }
+                                      },
+                                      child: const Text('Registrarse'),
+                                    ),
                                     Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                      Center(child: Text("¿Ya tienes una cuenta?"),),
-                                      SizedBox(height: 10),
-                                      ElevatedButton(
-                                      onPressed: () {
-                                    Get.toNamed('/login');
-                                        },
-                                        child: Text('Inicia sesión'),
-                                      )
-
-                                      ]),)
-                                ],
-                              ),
-                            ))
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                  ),
-                ]),
-              ),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: 50),
+                                  const Center(child: Text("¿No tienes una cuenta?"),),
+                                  const SizedBox(height: 10),
+                                  OutlinedButton(
+                                  onPressed: () {
+                                      Get.toNamed('/login');
+                                  },
+                                  child: const Text('Inicia Session'),
+                                ),
+                                SizedBox(height: 50),
+                    
+                                ])
+                        ],
+                      ),
+                    )
+                    )
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                ),
+              ]),
             ),
           ),
         ),

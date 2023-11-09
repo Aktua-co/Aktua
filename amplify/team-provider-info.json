@@ -1,25 +1,37 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-aktuaamplify-dev-205703-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-205703-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-205703-authRole",
+      "AuthRoleName": "amplify-aktuaamplify-dev-122110-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-122110-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-dev-122110-authRole",
       "Region": "sa-east-1",
-      "DeploymentBucketName": "amplify-aktuaamplify-dev-205703-deployment",
-      "UnauthRoleName": "amplify-aktuaamplify-dev-205703-unauthRole",
-      "StackName": "amplify-aktuaamplify-dev-205703",
-      "StackId": "arn:aws:cloudformation:sa-east-1:537625335431:stack/amplify-aktuaamplify-dev-205703/3ac2a720-656d-11ee-b7a4-068d22ad7996",
-      "AmplifyAppId": "d1q2ygfbhhq7tb"
+      "DeploymentBucketName": "amplify-aktuaamplify-dev-122110-deployment",
+      "UnauthRoleName": "amplify-aktuaamplify-dev-122110-unauthRole",
+      "StackName": "amplify-aktuaamplify-dev-122110",
+      "StackId": "arn:aws:cloudformation:sa-east-1:537625335431:stack/amplify-aktuaamplify-dev-122110/4ec53840-6aa5-11ee-b152-0a11731c486a",
+      "AmplifyAppId": "dxdrh09qm10ey"
+    }
+  },
+  "aktuadev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aktuaamplify-aktuadev-154912-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-aktuadev-154912-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537625335431:role/amplify-aktuaamplify-aktuadev-154912-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-aktuaamplify-aktuadev-154912-deployment",
+      "UnauthRoleName": "amplify-aktuaamplify-aktuadev-154912-unauthRole",
+      "StackName": "amplify-aktuaamplify-aktuadev-154912",
+      "StackId": "arn:aws:cloudformation:us-east-2:537625335431:stack/amplify-aktuaamplify-aktuadev-154912/5f7bc290-6ac2-11ee-b955-0617865bc937",
+      "AmplifyAppId": "dov7pb7shnfvr"
     },
     "categories": {
       "auth": {
-        "aktuaamplify394be7b6394be7b6": {
-          "facebookAppId": "1350765928885095",
-          "googleClientId": "941259870408-9e26ikf3p1jgbslbtoisohdo16nfdg1k.apps.googleusercontent.com"
-        },
-        "userPoolGroups": {}
+        "aktuaamplify33f56204": {}
       },
       "api": {
+        "aktuaamplify": {}
+      },
+      "analytics": {
         "aktuaamplify": {}
       }
     }

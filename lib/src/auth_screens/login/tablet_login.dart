@@ -185,20 +185,23 @@ Future<void> login()async{
                                 },
                               ),
                               SizedBox(height: 10),
-                                    ElevatedButton(
-                                      onPressed: (){
-                                          if (_formKeyLogin.currentState!.validate()) {
-                                            login();
-                                          }
-                                      },
-                                      child: Text('Ingresar'),
+                                    Container(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: (){
+                                            if (_formKeyLogin.currentState!.validate()) {
+                                              login();
+                                            }
+                                        },
+                                        child: Text('Ingresar'),
+                                      ),
                                     ),
                               Expanded(child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                   Center(child: Text("¿No tienes una cuenta?"),),
                                   SizedBox(height: 10),
-                                  ElevatedButton(
+                                  OutlinedButton(
                                   onPressed: () {
                                       Get.toNamed('/registro');
                                   },

@@ -20,23 +20,21 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
 
 /** This is an auto generated class representing the Mensaje type in your schema. */
-@immutable
-class Mensaje extends Model {
+class Mensaje extends amplify_core.Model {
   static const classType = const _MensajeModelType();
   final String id;
   final String? _mensaje_id;
   final Usuario? _emisor;
   final Usuario? _receptor;
   final String? _mensaje;
-  final TemporalDateTime? _timestamp;
+  final amplify_core.TemporalDateTime? _timestamp;
   final bool? _leido;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -55,10 +53,10 @@ class Mensaje extends Model {
     try {
       return _mensaje_id!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -76,23 +74,23 @@ class Mensaje extends Model {
     try {
       return _mensaje!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
   }
   
-  TemporalDateTime get timestamp {
+  amplify_core.TemporalDateTime get timestamp {
     try {
       return _timestamp!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -102,28 +100,28 @@ class Mensaje extends Model {
     try {
       return _leido!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
   const Mensaje._internal({required this.id, required mensaje_id, emisor, receptor, required mensaje, required timestamp, required leido, createdAt, updatedAt}): _mensaje_id = mensaje_id, _emisor = emisor, _receptor = receptor, _mensaje = mensaje, _timestamp = timestamp, _leido = leido, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Mensaje({String? id, required String mensaje_id, Usuario? emisor, Usuario? receptor, required String mensaje, required TemporalDateTime timestamp, required bool leido}) {
+  factory Mensaje({String? id, required String mensaje_id, Usuario? emisor, Usuario? receptor, required String mensaje, required amplify_core.TemporalDateTime timestamp, required bool leido}) {
     return Mensaje._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       mensaje_id: mensaje_id,
       emisor: emisor,
       receptor: receptor,
@@ -171,7 +169,7 @@ class Mensaje extends Model {
     return buffer.toString();
   }
   
-  Mensaje copyWith({String? mensaje_id, Usuario? emisor, Usuario? receptor, String? mensaje, TemporalDateTime? timestamp, bool? leido}) {
+  Mensaje copyWith({String? mensaje_id, Usuario? emisor, Usuario? receptor, String? mensaje, amplify_core.TemporalDateTime? timestamp, bool? leido}) {
     return Mensaje._internal(
       id: id,
       mensaje_id: mensaje_id ?? this.mensaje_id,
@@ -180,6 +178,25 @@ class Mensaje extends Model {
       mensaje: mensaje ?? this.mensaje,
       timestamp: timestamp ?? this.timestamp,
       leido: leido ?? this.leido);
+  }
+  
+  Mensaje copyWithModelFieldValues({
+    ModelFieldValue<String>? mensaje_id,
+    ModelFieldValue<Usuario?>? emisor,
+    ModelFieldValue<Usuario?>? receptor,
+    ModelFieldValue<String>? mensaje,
+    ModelFieldValue<amplify_core.TemporalDateTime>? timestamp,
+    ModelFieldValue<bool>? leido
+  }) {
+    return Mensaje._internal(
+      id: id,
+      mensaje_id: mensaje_id == null ? this.mensaje_id : mensaje_id.value,
+      emisor: emisor == null ? this.emisor : emisor.value,
+      receptor: receptor == null ? this.receptor : receptor.value,
+      mensaje: mensaje == null ? this.mensaje : mensaje.value,
+      timestamp: timestamp == null ? this.timestamp : timestamp.value,
+      leido: leido == null ? this.leido : leido.value
+    );
   }
   
   Mensaje.fromJson(Map<String, dynamic> json)  
@@ -192,111 +209,119 @@ class Mensaje extends Model {
         ? Usuario.fromJson(new Map<String, dynamic>.from(json['receptor']['serializedData']))
         : null,
       _mensaje = json['mensaje'],
-      _timestamp = json['timestamp'] != null ? TemporalDateTime.fromString(json['timestamp']) : null,
+      _timestamp = json['timestamp'] != null ? amplify_core.TemporalDateTime.fromString(json['timestamp']) : null,
       _leido = json['leido'],
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
     'id': id, 'mensaje_id': _mensaje_id, 'emisor': _emisor?.toJson(), 'receptor': _receptor?.toJson(), 'mensaje': _mensaje, 'timestamp': _timestamp?.format(), 'leido': _leido, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'mensaje_id': _mensaje_id, 'emisor': _emisor, 'receptor': _receptor, 'mensaje': _mensaje, 'timestamp': _timestamp, 'leido': _leido, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'mensaje_id': _mensaje_id,
+    'emisor': _emisor,
+    'receptor': _receptor,
+    'mensaje': _mensaje,
+    'timestamp': _timestamp,
+    'leido': _leido,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<MensajeModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<MensajeModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField MENSAJE_ID = QueryField(fieldName: "mensaje_id");
-  static final QueryField EMISOR = QueryField(
+  static final amplify_core.QueryModelIdentifier<MensajeModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<MensajeModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final MENSAJE_ID = amplify_core.QueryField(fieldName: "mensaje_id");
+  static final EMISOR = amplify_core.QueryField(
     fieldName: "emisor",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
-  static final QueryField RECEPTOR = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
+  static final RECEPTOR = amplify_core.QueryField(
     fieldName: "receptor",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
-  static final QueryField MENSAJE = QueryField(fieldName: "mensaje");
-  static final QueryField TIMESTAMP = QueryField(fieldName: "timestamp");
-  static final QueryField LEIDO = QueryField(fieldName: "leido");
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
+  static final MENSAJE = amplify_core.QueryField(fieldName: "mensaje");
+  static final TIMESTAMP = amplify_core.QueryField(fieldName: "timestamp");
+  static final LEIDO = amplify_core.QueryField(fieldName: "leido");
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Mensaje";
     modelSchemaDefinition.pluralName = "Mensajes";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE,
+          amplify_core.ModelOperation.READ
         ])
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["emisorID"], name: "byEmisor"),
-      ModelIndex(fields: const ["receptorID"], name: "byReceptor")
+      amplify_core.ModelIndex(fields: const ["emisorID"], name: "byEmisor"),
+      amplify_core.ModelIndex(fields: const ["receptorID"], name: "byReceptor")
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Mensaje.MENSAJE_ID,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Mensaje.EMISOR,
       isRequired: false,
       targetNames: ['emisorID'],
       ofModelName: 'Usuario'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Mensaje.RECEPTOR,
       isRequired: false,
       targetNames: ['receptorID'],
       ofModelName: 'Usuario'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Mensaje.MENSAJE,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Mensaje.TIMESTAMP,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Mensaje.LEIDO,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.bool)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.bool)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _MensajeModelType extends ModelType<Mensaje> {
+class _MensajeModelType extends amplify_core.ModelType<Mensaje> {
   const _MensajeModelType();
   
   @override
@@ -314,8 +339,7 @@ class _MensajeModelType extends ModelType<Mensaje> {
  * This is an auto generated class representing the model identifier
  * of [Mensaje] in your schema.
  */
-@immutable
-class MensajeModelIdentifier implements ModelIdentifier<Mensaje> {
+class MensajeModelIdentifier implements amplify_core.ModelIdentifier<Mensaje> {
   final String id;
 
   /** Create an instance of MensajeModelIdentifier using [id] the primary key. */

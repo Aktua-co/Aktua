@@ -1,4 +1,11 @@
 export type AmplifyDependentResourcesAttributes = {
+  "analytics": {
+    "aktuaamplify": {
+      "Id": "string",
+      "Region": "string",
+      "appName": "string"
+    }
+  },
   "api": {
     "aktuaamplify": {
       "GraphQLAPIEndpointOutput": "string",
@@ -7,21 +14,14 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "aktuaamplify394be7b6394be7b6": {
+    "aktuaamplify33f56204": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "FacebookWebClient": "string",
-      "GoogleWebClient": "string",
-      "HostedUIDomain": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
-      "OAuthMetadata": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
-    },
-    "userPoolGroups": {
-      "aktuaUsergroupsGroupRole": "string"
     }
   }
 }

@@ -20,19 +20,17 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
 
 /** This is an auto generated class representing the GrupoInteres type in your schema. */
-@immutable
-class GrupoInteres extends Model {
+class GrupoInteres extends amplify_core.Model {
   static const classType = const _GrupoInteresModelType();
   final String id;
   final Grupo? _grupo;
   final Interes? _interes;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -55,11 +53,11 @@ class GrupoInteres extends Model {
     return _interes;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
@@ -67,7 +65,7 @@ class GrupoInteres extends Model {
   
   factory GrupoInteres({String? id, Grupo? grupo, Interes? interes}) {
     return GrupoInteres._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       grupo: grupo,
       interes: interes);
   }
@@ -110,6 +108,17 @@ class GrupoInteres extends Model {
       interes: interes ?? this.interes);
   }
   
+  GrupoInteres copyWithModelFieldValues({
+    ModelFieldValue<Grupo?>? grupo,
+    ModelFieldValue<Interes?>? interes
+  }) {
+    return GrupoInteres._internal(
+      id: id,
+      grupo: grupo == null ? this.grupo : grupo.value,
+      interes: interes == null ? this.interes : interes.value
+    );
+  }
+  
   GrupoInteres.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _grupo = json['grupo']?['serializedData'] != null
@@ -118,81 +127,85 @@ class GrupoInteres extends Model {
       _interes = json['interes']?['serializedData'] != null
         ? Interes.fromJson(new Map<String, dynamic>.from(json['interes']['serializedData']))
         : null,
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
     'id': id, 'grupo': _grupo?.toJson(), 'interes': _interes?.toJson(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'grupo': _grupo, 'interes': _interes, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'grupo': _grupo,
+    'interes': _interes,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<GrupoInteresModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<GrupoInteresModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField GRUPO = QueryField(
+  static final amplify_core.QueryModelIdentifier<GrupoInteresModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<GrupoInteresModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final GRUPO = amplify_core.QueryField(
     fieldName: "grupo",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Grupo'));
-  static final QueryField INTERES = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Grupo'));
+  static final INTERES = amplify_core.QueryField(
     fieldName: "interes",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Interes'));
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Interes'));
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "GrupoInteres";
     modelSchemaDefinition.pluralName = "GrupoInteres";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE,
+          amplify_core.ModelOperation.READ
         ])
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["grupoID"], name: "byGrupo"),
-      ModelIndex(fields: const ["interesID"], name: "byInteres")
+      amplify_core.ModelIndex(fields: const ["grupoID"], name: "byGrupo"),
+      amplify_core.ModelIndex(fields: const ["interesID"], name: "byInteres")
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: GrupoInteres.GRUPO,
       isRequired: false,
       targetNames: ['grupoID'],
       ofModelName: 'Grupo'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: GrupoInteres.INTERES,
       isRequired: false,
       targetNames: ['interesID'],
       ofModelName: 'Interes'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _GrupoInteresModelType extends ModelType<GrupoInteres> {
+class _GrupoInteresModelType extends amplify_core.ModelType<GrupoInteres> {
   const _GrupoInteresModelType();
   
   @override
@@ -210,8 +223,7 @@ class _GrupoInteresModelType extends ModelType<GrupoInteres> {
  * This is an auto generated class representing the model identifier
  * of [GrupoInteres] in your schema.
  */
-@immutable
-class GrupoInteresModelIdentifier implements ModelIdentifier<GrupoInteres> {
+class GrupoInteresModelIdentifier implements amplify_core.ModelIdentifier<GrupoInteres> {
   final String id;
 
   /** Create an instance of GrupoInteresModelIdentifier using [id] the primary key. */

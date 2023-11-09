@@ -1,11 +1,12 @@
 # ////ONLY TO GETT STARTED
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
+
 type Usuario @model
   @auth(
     rules: [
       # Allow anyone to create a user (registration)
-      { allow: public, operations: [create] },
+      { allow: public, operations: [create,read, update, delete] },
       # Allow owners to read, update, and delete their own user
       { allow: owner, operations: [read, update, delete] }
     ]
@@ -14,10 +15,9 @@ type Usuario @model
   nombre: String!
   correo: String!
   direccion: String!
-  creado_en: AWSDateTime!
   rango_visibilidad: Int  
-  barrioID: ID! @index(name: "byBarrio")
-  barrio: Barrio! @belongsTo(fields: ["barrioID"])
+  barrioID: ID @index(name: "byBarrio")
+  barrio: Barrio! @belongsTo(fields: ["id"])
   telefono: String!
   foto_perfil: String
   intereses: [String]
@@ -31,22 +31,25 @@ type Usuario @model
   cupones: [Cupon] @hasMany(indexName: "byUsuario", fields: ["id"])
 }
 
-
-type Negocio @model @auth(rules: [{ allow: owner }]){
+type Negocio @model @auth( rules: [
+      # Allow anyone to create a user (registration)
+      { allow: public, operations: [create,read, update, delete] },
+      # Allow owners to read, update, and delete their own user
+      { allow: owner, operations: [read, update, delete] }
+    ]){
   id: ID!
-  usuarioID: ID!
-  usuario: Usuario @belongsTo(fields: ["usuarioID"])
+  usuarioID: ID @index(name: "byUsuario")
+  usuario: Usuario @belongsTo(fields: ["id"])
   nombre_negocio: String!
-  barrioID: ID @index(name: "byBarrio")
-  barrio: Barrio @belongsTo(fields: ["barrioID"])
   correo: String!
   logo: String
   banner: String
   direccion: String!
   telefono: String!
-  creado_en: AWSDateTime!
-  categoriaID: ID @index(name: "byCategoria")
-  categoria: Categoria @belongsTo(fields: ["categoriaID"])
+  barrioID: ID! @index(name: "byBarrio")  # Define the "byBarrio" index
+  barrio: Barrio @belongsTo(fields: ["barrioID"])
+  categoriaID: ID @index(name: "byCatergoria")
+  categoria: Categoria @belongsTo(fields: ["id"])
   descripcion: String
   horario: String
   puntuacion_promedio: Float
@@ -54,18 +57,23 @@ type Negocio @model @auth(rules: [{ allow: owner }]){
   reviews: [Review] @hasMany(indexName: "byNegocio", fields: ["id"])
 }
 
-type Barrio @model @auth(rules: [{ allow: owner, operations: [read,update] }, { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] }]){
+type Barrio @model @auth(
+    rules: [
+        { allow: public, operations: [read,create,update] },
+        { allow: owner, operations: [read,create,update] }, 
+        { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] }]){
   id: ID!
   nombre: String!
   vecinos: [Usuario] @hasMany(indexName: "byBarrio", fields: ["id"])
   negocios: [Negocio] @hasMany(indexName: "byBarrio", fields: ["id"])
-  creado_en: AWSDateTime!
 }
 
+
+
 type Cupon @model  @auth(rules: [{ allow: owner }]) {
-  id_cupon: ID!
-  negocioID: ID!  @index(name: "byNegocio")
-  negocio: Negocio @belongsTo(fields: ["negocioID"]) 
+  id: ID!
+  negocioID: ID  @index(name: "byNegocio")
+  negocio: Negocio @belongsTo(fields: ["id"]) 
   descripcion: String!
   codigo: String!
   fecha_expiracion: AWSDateTime!
@@ -76,10 +84,10 @@ type Cupon @model  @auth(rules: [{ allow: owner }]) {
 }
 
 type Categoria @model @auth(rules: [{ allow: owner, operations: [read] }, { allow: groups, groups: ["Admin"], operations: [create, update, delete] }]){
-  id_categoria: ID!
+  id: ID!
   nombre: String!
   descripcion: String!
-  negocios: [Negocio] @hasMany(indexName: "byCategoria", fields: ["id_categoria"])
+  negocios: [Negocio] @hasMany(indexName: "byCatergoria", fields: ["id"])
 }
 
 type Publicacion @model @auth(rules: [{ allow: owner }]){

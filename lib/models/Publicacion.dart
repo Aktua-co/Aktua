@@ -20,25 +20,23 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 
 /** This is an auto generated class representing the Publicacion type in your schema. */
-@immutable
-class Publicacion extends Model {
+class Publicacion extends amplify_core.Model {
   static const classType = const _PublicacionModelType();
   final String id;
-  final TemporalDateTime? _timestamp;
+  final amplify_core.TemporalDateTime? _timestamp;
   final Usuario? _usuario;
   final String? _categoria;
   final String? _titulo;
   final String? _contenido;
   final List<String>? _imagenes;
   final List<String>? _videos;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -53,14 +51,14 @@ class Publicacion extends Model {
       );
   }
   
-  TemporalDateTime get timestamp {
+  amplify_core.TemporalDateTime get timestamp {
     try {
       return _timestamp!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -74,10 +72,10 @@ class Publicacion extends Model {
     try {
       return _categoria!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -87,10 +85,10 @@ class Publicacion extends Model {
     try {
       return _titulo!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -100,10 +98,10 @@ class Publicacion extends Model {
     try {
       return _contenido!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -117,19 +115,19 @@ class Publicacion extends Model {
     return _videos;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
   const Publicacion._internal({required this.id, required timestamp, usuario, required categoria, required titulo, required contenido, imagenes, videos, createdAt, updatedAt}): _timestamp = timestamp, _usuario = usuario, _categoria = categoria, _titulo = titulo, _contenido = contenido, _imagenes = imagenes, _videos = videos, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Publicacion({String? id, required TemporalDateTime timestamp, Usuario? usuario, required String categoria, required String titulo, required String contenido, List<String>? imagenes, List<String>? videos}) {
+  factory Publicacion({String? id, required amplify_core.TemporalDateTime timestamp, Usuario? usuario, required String categoria, required String titulo, required String contenido, List<String>? imagenes, List<String>? videos}) {
     return Publicacion._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       timestamp: timestamp,
       usuario: usuario,
       categoria: categoria,
@@ -180,7 +178,7 @@ class Publicacion extends Model {
     return buffer.toString();
   }
   
-  Publicacion copyWith({TemporalDateTime? timestamp, Usuario? usuario, String? categoria, String? titulo, String? contenido, List<String>? imagenes, List<String>? videos}) {
+  Publicacion copyWith({amplify_core.TemporalDateTime? timestamp, Usuario? usuario, String? categoria, String? titulo, String? contenido, List<String>? imagenes, List<String>? videos}) {
     return Publicacion._internal(
       id: id,
       timestamp: timestamp ?? this.timestamp,
@@ -192,9 +190,30 @@ class Publicacion extends Model {
       videos: videos ?? this.videos);
   }
   
+  Publicacion copyWithModelFieldValues({
+    ModelFieldValue<amplify_core.TemporalDateTime>? timestamp,
+    ModelFieldValue<Usuario?>? usuario,
+    ModelFieldValue<String>? categoria,
+    ModelFieldValue<String>? titulo,
+    ModelFieldValue<String>? contenido,
+    ModelFieldValue<List<String>?>? imagenes,
+    ModelFieldValue<List<String>?>? videos
+  }) {
+    return Publicacion._internal(
+      id: id,
+      timestamp: timestamp == null ? this.timestamp : timestamp.value,
+      usuario: usuario == null ? this.usuario : usuario.value,
+      categoria: categoria == null ? this.categoria : categoria.value,
+      titulo: titulo == null ? this.titulo : titulo.value,
+      contenido: contenido == null ? this.contenido : contenido.value,
+      imagenes: imagenes == null ? this.imagenes : imagenes.value,
+      videos: videos == null ? this.videos : videos.value
+    );
+  }
+  
   Publicacion.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _timestamp = json['timestamp'] != null ? TemporalDateTime.fromString(json['timestamp']) : null,
+      _timestamp = json['timestamp'] != null ? amplify_core.TemporalDateTime.fromString(json['timestamp']) : null,
       _usuario = json['usuario']?['serializedData'] != null
         ? Usuario.fromJson(new Map<String, dynamic>.from(json['usuario']['serializedData']))
         : null,
@@ -203,114 +222,123 @@ class Publicacion extends Model {
       _contenido = json['contenido'],
       _imagenes = json['imagenes']?.cast<String>(),
       _videos = json['videos']?.cast<String>(),
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
     'id': id, 'timestamp': _timestamp?.format(), 'usuario': _usuario?.toJson(), 'categoria': _categoria, 'titulo': _titulo, 'contenido': _contenido, 'imagenes': _imagenes, 'videos': _videos, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'timestamp': _timestamp, 'usuario': _usuario, 'categoria': _categoria, 'titulo': _titulo, 'contenido': _contenido, 'imagenes': _imagenes, 'videos': _videos, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'timestamp': _timestamp,
+    'usuario': _usuario,
+    'categoria': _categoria,
+    'titulo': _titulo,
+    'contenido': _contenido,
+    'imagenes': _imagenes,
+    'videos': _videos,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<PublicacionModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<PublicacionModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField TIMESTAMP = QueryField(fieldName: "timestamp");
-  static final QueryField USUARIO = QueryField(
+  static final amplify_core.QueryModelIdentifier<PublicacionModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<PublicacionModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final TIMESTAMP = amplify_core.QueryField(fieldName: "timestamp");
+  static final USUARIO = amplify_core.QueryField(
     fieldName: "usuario",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
-  static final QueryField CATEGORIA = QueryField(fieldName: "categoria");
-  static final QueryField TITULO = QueryField(fieldName: "titulo");
-  static final QueryField CONTENIDO = QueryField(fieldName: "contenido");
-  static final QueryField IMAGENES = QueryField(fieldName: "imagenes");
-  static final QueryField VIDEOS = QueryField(fieldName: "videos");
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
+  static final CATEGORIA = amplify_core.QueryField(fieldName: "categoria");
+  static final TITULO = amplify_core.QueryField(fieldName: "titulo");
+  static final CONTENIDO = amplify_core.QueryField(fieldName: "contenido");
+  static final IMAGENES = amplify_core.QueryField(fieldName: "imagenes");
+  static final VIDEOS = amplify_core.QueryField(fieldName: "videos");
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Publicacion";
     modelSchemaDefinition.pluralName = "Publicacions";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE,
+          amplify_core.ModelOperation.READ
         ])
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["usuarioID"], name: "byUsuario")
+      amplify_core.ModelIndex(fields: const ["usuarioID"], name: "byUsuario")
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.TIMESTAMP,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Publicacion.USUARIO,
       isRequired: false,
       targetNames: ['usuarioID'],
       ofModelName: 'Usuario'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.CATEGORIA,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.TITULO,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.CONTENIDO,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.IMAGENES,
       isRequired: false,
       isArray: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.collection, ofModelName: describeEnum(ModelFieldTypeEnum.string))
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.collection, ofModelName: amplify_core.ModelFieldTypeEnum.string.name)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Publicacion.VIDEOS,
       isRequired: false,
       isArray: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.collection, ofModelName: describeEnum(ModelFieldTypeEnum.string))
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.collection, ofModelName: amplify_core.ModelFieldTypeEnum.string.name)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _PublicacionModelType extends ModelType<Publicacion> {
+class _PublicacionModelType extends amplify_core.ModelType<Publicacion> {
   const _PublicacionModelType();
   
   @override
@@ -328,8 +356,7 @@ class _PublicacionModelType extends ModelType<Publicacion> {
  * This is an auto generated class representing the model identifier
  * of [Publicacion] in your schema.
  */
-@immutable
-class PublicacionModelIdentifier implements ModelIdentifier<Publicacion> {
+class PublicacionModelIdentifier implements amplify_core.ModelIdentifier<Publicacion> {
   final String id;
 
   /** Create an instance of PublicacionModelIdentifier using [id] the primary key. */

@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "aktuaamplify": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "aktuaamplify": {
       "dependsOn": [
@@ -7,22 +13,27 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "aktuaamplify394be7b6394be7b6"
+          "resourceName": "aktuaamplify33f56204"
         }
       ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
+              "authenticationType": "AWS_IAM"
+            },
+            {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authaktuaamplify394be7b6394be7b6"
+                "userPoolId": "authaktuaamplify33f56204"
               }
             }
           ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2024-01-13T00:12:12.127Z",
+              "apiKeyExpirationDays": 90,
+              "description": "aktua"
             },
             "authenticationType": "API_KEY"
           }
@@ -33,7 +44,7 @@
     }
   },
   "auth": {
-    "aktuaamplify394be7b6394be7b6": {
+    "aktuaamplify33f56204": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -42,21 +53,13 @@
           "SMS"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_UPPERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS"
-          ],
+          "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
           "EMAIL"
         ],
-        "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE"
-        ],
+        "socialProviders": [],
         "usernameAttributes": [
           "EMAIL"
         ],
@@ -66,40 +69,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    },
-    "userPoolGroups": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "aktuaamplify394be7b6394be7b6"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito-UserPool-Groups"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_auth_aktuaamplify394be7b6394be7b6_facebookAppId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "aktuaamplify394be7b6394be7b6"
-        }
-      ]
-    },
-    "AMPLIFY_auth_aktuaamplify394be7b6394be7b6_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "aktuaamplify394be7b6394be7b6"
-        }
-      ]
     }
   }
 }

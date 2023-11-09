@@ -87,7 +87,6 @@ Future<AuthResponse> confirmUser({
   }
 }
 
-
 Future<void> saveUser(
   String nombre,
   String correo,
@@ -96,13 +95,21 @@ Future<void> saveUser(
   String telefono,
 
 ) async {
+    // Obtain the Barrio object by name
+  Barrio newBarrio = await obtenerBarrio(barrio);
+
+  // Check if a Barrio was found
+  if (newBarrio == null) {
+    safePrint('Barrio not found for name: $barrio');
+    return;
+  }
   final newUser = Usuario(
     nombre: nombre,
     correo: correo,
-    direccion: '', 
-    telefono: '',
-    barrio: Barrio(nombre:'', creado_en: TemporalDateTime.now()), 
-    creado_en: TemporalDateTime.now(), 
+    direccion: direccion, 
+    telefono: telefono,
+    barrio: newBarrio, 
+   
     
   );
 
@@ -123,38 +130,65 @@ Future<void> saveUser(
   }
 }
 
+Future<Barrio> obtenerBarrio(String nombreBarrio) async{
+  final barrioSelected = nombreBarrio;
+  final queryPredicate = Barrio.NOMBRE.eq(barrioSelected);
+
+  final request = ModelQueries.list<Barrio>(
+    Barrio.classType,
+    where: queryPredicate,
+    authorizationMode: APIAuthorizationType.apiKey,
+  );
+
+  final response = await Amplify.API.query(request: request).response;
+  final barrioFromResponse = response.data?.items.first;
+  print("__barrioFromResponse__");
+  print(barrioFromResponse);
+  return barrioFromResponse!;
+
+}
+
+
 Future<void> saveNegocio(
   String nombre,
   String correo,
-  String barrio,
+  String barrioName,
   String direccion,
   String telefono,
-
 ) async {
+  // Obtain the Barrio object by name
+  Barrio newBarrio = await obtenerBarrio(barrioName);
+ //TODO: AGREGAR MANEJO DE ERRORES, SI NO SE ENCUENTRA EL BARRIO, CREARLO
+  // Check if a Barrio was found
+  if (newBarrio == null) {
+    safePrint('Barrio not found for name: $barrioName');
+    return;
+  }
+
+  // Create a new Negocio object
   final newNegocio = Negocio(
-    nombre_negocio: '',
-    correo: correo, 
-    direccion: '', 
-    telefono: '', 
-    barrio: Barrio(nombre:'', creado_en: TemporalDateTime.now()),
-    creado_en: TemporalDateTime.now(),
+    nombre_negocio: nombre,
+    correo: correo,
+    direccion: direccion,
+    telefono: telefono,
     
   );
 
   try {
+    // Perform the mutation to save the Negocio
     final request = ModelMutations.create(
       newNegocio,
       authorizationMode: APIAuthorizationType.apiKey,
-      );
+    );
     final res = await Amplify.API.mutate(request: request).response;
     final resData = res.data;
     if (resData == null) {
-      safePrint('errors: ${res.errors}');
+      safePrint('Errors: ${res.errors}');
       return;
     }
     safePrint('Mutation result: ${resData.toJson()}');
   } on DataStoreException catch (e) {
-    safePrint('Something went wrong saving model: ${e.message}');
+    safePrint('Something went wrong saving the model: ${e.message}');
   }
 }
 

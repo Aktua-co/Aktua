@@ -6,6 +6,8 @@ import 'package:aktua_amplify/src/utils/validadores.dart';
 import 'package:faker/faker.dart';
 import 'package:aktua_amplify/src/auth_screens/login/controller_login.dart';
 import 'package:get/get.dart';
+import 'package:aktua_amplify/src/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 
 class MobilePerfil extends StatefulWidget {
@@ -36,6 +38,24 @@ class _MobilePerfilState extends State<MobilePerfil> {
 
   bool isLoading = false;
   final _formKeyUserData = GlobalKey<FormState>();
+ late UserProvider userProvider ;
+
+    @override
+    void initState() {
+      super.initState();
+       print("((USER))");
+       userProvider = Provider.of<UserProvider>(context, listen: false);
+       userProvider.fetchUserAttributes().then((value) => {
+        print(userProvider.userAttributes['email']),
+        emailController.text = userProvider.userAttributes['email']!,
+        nombreController.text = userProvider.userAttributes['name']!,
+        apellidoPaternoController.text = userProvider.userAttributes['custom:apellido_paterno']!,
+
+       });
+
+    }
+
+
 
   @override
   Widget build(BuildContext context) {

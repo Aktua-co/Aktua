@@ -20,33 +20,32 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 
 /** This is an auto generated class representing the Negocio type in your schema. */
-@immutable
-class Negocio extends Model {
+class Negocio extends amplify_core.Model {
   static const classType = const _NegocioModelType();
   final String id;
+  final String? _usuarioID;
   final Usuario? _usuario;
   final String? _nombre_negocio;
-  final Barrio? _barrio;
   final String? _correo;
   final String? _logo;
   final String? _banner;
   final String? _direccion;
   final String? _telefono;
-  final TemporalDateTime? _creado_en;
+  final Barrio? _barrio;
+  final String? _categoriaID;
   final Categoria? _categoria;
   final String? _descripcion;
   final String? _horario;
   final double? _puntuacion_promedio;
   final List<Cupon>? _cupones;
   final List<Review>? _reviews;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -61,6 +60,10 @@ class Negocio extends Model {
       );
   }
   
+  String? get usuarioID {
+    return _usuarioID;
+  }
+  
   Usuario? get usuario {
     return _usuario;
   }
@@ -69,27 +72,23 @@ class Negocio extends Model {
     try {
       return _nombre_negocio!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
-  }
-  
-  Barrio? get barrio {
-    return _barrio;
   }
   
   String get correo {
     try {
       return _correo!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -107,10 +106,10 @@ class Negocio extends Model {
     try {
       return _direccion!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -120,26 +119,21 @@ class Negocio extends Model {
     try {
       return _telefono!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
   }
   
-  TemporalDateTime get creado_en {
-    try {
-      return _creado_en!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
+  Barrio? get barrio {
+    return _barrio;
+  }
+  
+  String? get categoriaID {
+    return _categoriaID;
   }
   
   Categoria? get categoria {
@@ -166,28 +160,29 @@ class Negocio extends Model {
     return _reviews;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
-  const Negocio._internal({required this.id, usuario, required nombre_negocio, barrio, required correo, logo, banner, required direccion, required telefono, required creado_en, categoria, descripcion, horario, puntuacion_promedio, cupones, reviews, createdAt, updatedAt}): _usuario = usuario, _nombre_negocio = nombre_negocio, _barrio = barrio, _correo = correo, _logo = logo, _banner = banner, _direccion = direccion, _telefono = telefono, _creado_en = creado_en, _categoria = categoria, _descripcion = descripcion, _horario = horario, _puntuacion_promedio = puntuacion_promedio, _cupones = cupones, _reviews = reviews, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Negocio._internal({required this.id, usuarioID, usuario, required nombre_negocio, required correo, logo, banner, required direccion, required telefono, barrio, categoriaID, categoria, descripcion, horario, puntuacion_promedio, cupones, reviews, createdAt, updatedAt}): _usuarioID = usuarioID, _usuario = usuario, _nombre_negocio = nombre_negocio, _correo = correo, _logo = logo, _banner = banner, _direccion = direccion, _telefono = telefono, _barrio = barrio, _categoriaID = categoriaID, _categoria = categoria, _descripcion = descripcion, _horario = horario, _puntuacion_promedio = puntuacion_promedio, _cupones = cupones, _reviews = reviews, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Negocio({String? id, Usuario? usuario, required String nombre_negocio, Barrio? barrio, required String correo, String? logo, String? banner, required String direccion, required String telefono, required TemporalDateTime creado_en, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
+  factory Negocio({String? id, String? usuarioID, Usuario? usuario, required String nombre_negocio, required String correo, String? logo, String? banner, required String direccion, required String telefono, Barrio? barrio, String? categoriaID, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
     return Negocio._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
+      usuarioID: usuarioID,
       usuario: usuario,
       nombre_negocio: nombre_negocio,
-      barrio: barrio,
       correo: correo,
       logo: logo,
       banner: banner,
       direccion: direccion,
       telefono: telefono,
-      creado_en: creado_en,
+      barrio: barrio,
+      categoriaID: categoriaID,
       categoria: categoria,
       descripcion: descripcion,
       horario: horario,
@@ -205,15 +200,16 @@ class Negocio extends Model {
     if (identical(other, this)) return true;
     return other is Negocio &&
       id == other.id &&
+      _usuarioID == other._usuarioID &&
       _usuario == other._usuario &&
       _nombre_negocio == other._nombre_negocio &&
-      _barrio == other._barrio &&
       _correo == other._correo &&
       _logo == other._logo &&
       _banner == other._banner &&
       _direccion == other._direccion &&
       _telefono == other._telefono &&
-      _creado_en == other._creado_en &&
+      _barrio == other._barrio &&
+      _categoriaID == other._categoriaID &&
       _categoria == other._categoria &&
       _descripcion == other._descripcion &&
       _horario == other._horario &&
@@ -231,15 +227,16 @@ class Negocio extends Model {
     
     buffer.write("Negocio {");
     buffer.write("id=" + "$id" + ", ");
+    buffer.write("usuarioID=" + "$_usuarioID" + ", ");
     buffer.write("usuario=" + (_usuario != null ? _usuario!.toString() : "null") + ", ");
     buffer.write("nombre_negocio=" + "$_nombre_negocio" + ", ");
-    buffer.write("barrio=" + (_barrio != null ? _barrio!.toString() : "null") + ", ");
     buffer.write("correo=" + "$_correo" + ", ");
     buffer.write("logo=" + "$_logo" + ", ");
     buffer.write("banner=" + "$_banner" + ", ");
     buffer.write("direccion=" + "$_direccion" + ", ");
     buffer.write("telefono=" + "$_telefono" + ", ");
-    buffer.write("creado_en=" + (_creado_en != null ? _creado_en!.format() : "null") + ", ");
+    buffer.write("barrio=" + (_barrio != null ? _barrio!.toString() : "null") + ", ");
+    buffer.write("categoriaID=" + "$_categoriaID" + ", ");
     buffer.write("categoria=" + (_categoria != null ? _categoria!.toString() : "null") + ", ");
     buffer.write("descripcion=" + "$_descripcion" + ", ");
     buffer.write("horario=" + "$_horario" + ", ");
@@ -251,18 +248,19 @@ class Negocio extends Model {
     return buffer.toString();
   }
   
-  Negocio copyWith({Usuario? usuario, String? nombre_negocio, Barrio? barrio, String? correo, String? logo, String? banner, String? direccion, String? telefono, TemporalDateTime? creado_en, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
+  Negocio copyWith({String? usuarioID, Usuario? usuario, String? nombre_negocio, String? correo, String? logo, String? banner, String? direccion, String? telefono, Barrio? barrio, String? categoriaID, Categoria? categoria, String? descripcion, String? horario, double? puntuacion_promedio, List<Cupon>? cupones, List<Review>? reviews}) {
     return Negocio._internal(
       id: id,
+      usuarioID: usuarioID ?? this.usuarioID,
       usuario: usuario ?? this.usuario,
       nombre_negocio: nombre_negocio ?? this.nombre_negocio,
-      barrio: barrio ?? this.barrio,
       correo: correo ?? this.correo,
       logo: logo ?? this.logo,
       banner: banner ?? this.banner,
       direccion: direccion ?? this.direccion,
       telefono: telefono ?? this.telefono,
-      creado_en: creado_en ?? this.creado_en,
+      barrio: barrio ?? this.barrio,
+      categoriaID: categoriaID ?? this.categoriaID,
       categoria: categoria ?? this.categoria,
       descripcion: descripcion ?? this.descripcion,
       horario: horario ?? this.horario,
@@ -271,21 +269,61 @@ class Negocio extends Model {
       reviews: reviews ?? this.reviews);
   }
   
+  Negocio copyWithModelFieldValues({
+    ModelFieldValue<String?>? usuarioID,
+    ModelFieldValue<Usuario?>? usuario,
+    ModelFieldValue<String>? nombre_negocio,
+    ModelFieldValue<String>? correo,
+    ModelFieldValue<String?>? logo,
+    ModelFieldValue<String?>? banner,
+    ModelFieldValue<String>? direccion,
+    ModelFieldValue<String>? telefono,
+    ModelFieldValue<Barrio?>? barrio,
+    ModelFieldValue<String?>? categoriaID,
+    ModelFieldValue<Categoria?>? categoria,
+    ModelFieldValue<String?>? descripcion,
+    ModelFieldValue<String?>? horario,
+    ModelFieldValue<double?>? puntuacion_promedio,
+    ModelFieldValue<List<Cupon>?>? cupones,
+    ModelFieldValue<List<Review>?>? reviews
+  }) {
+    return Negocio._internal(
+      id: id,
+      usuarioID: usuarioID == null ? this.usuarioID : usuarioID.value,
+      usuario: usuario == null ? this.usuario : usuario.value,
+      nombre_negocio: nombre_negocio == null ? this.nombre_negocio : nombre_negocio.value,
+      correo: correo == null ? this.correo : correo.value,
+      logo: logo == null ? this.logo : logo.value,
+      banner: banner == null ? this.banner : banner.value,
+      direccion: direccion == null ? this.direccion : direccion.value,
+      telefono: telefono == null ? this.telefono : telefono.value,
+      barrio: barrio == null ? this.barrio : barrio.value,
+      categoriaID: categoriaID == null ? this.categoriaID : categoriaID.value,
+      categoria: categoria == null ? this.categoria : categoria.value,
+      descripcion: descripcion == null ? this.descripcion : descripcion.value,
+      horario: horario == null ? this.horario : horario.value,
+      puntuacion_promedio: puntuacion_promedio == null ? this.puntuacion_promedio : puntuacion_promedio.value,
+      cupones: cupones == null ? this.cupones : cupones.value,
+      reviews: reviews == null ? this.reviews : reviews.value
+    );
+  }
+  
   Negocio.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
+      _usuarioID = json['usuarioID'],
       _usuario = json['usuario']?['serializedData'] != null
         ? Usuario.fromJson(new Map<String, dynamic>.from(json['usuario']['serializedData']))
         : null,
       _nombre_negocio = json['nombre_negocio'],
-      _barrio = json['barrio']?['serializedData'] != null
-        ? Barrio.fromJson(new Map<String, dynamic>.from(json['barrio']['serializedData']))
-        : null,
       _correo = json['correo'],
       _logo = json['logo'],
       _banner = json['banner'],
       _direccion = json['direccion'],
       _telefono = json['telefono'],
-      _creado_en = json['creado_en'] != null ? TemporalDateTime.fromString(json['creado_en']) : null,
+      _barrio = json['barrio']?['serializedData'] != null
+        ? Barrio.fromJson(new Map<String, dynamic>.from(json['barrio']['serializedData']))
+        : null,
+      _categoriaID = json['categoriaID'],
       _categoria = json['categoria']?['serializedData'] != null
         ? Categoria.fromJson(new Map<String, dynamic>.from(json['categoria']['serializedData']))
         : null,
@@ -304,181 +342,214 @@ class Negocio extends Model {
           .map((e) => Review.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'usuario': _usuario?.toJson(), 'nombre_negocio': _nombre_negocio, 'barrio': _barrio?.toJson(), 'correo': _correo, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'creado_en': _creado_en?.format(), 'categoria': _categoria?.toJson(), 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones?.map((Cupon? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'usuarioID': _usuarioID, 'usuario': _usuario?.toJson(), 'nombre_negocio': _nombre_negocio, 'correo': _correo, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'barrio': _barrio?.toJson(), 'categoriaID': _categoriaID, 'categoria': _categoria?.toJson(), 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones?.map((Cupon? e) => e?.toJson()).toList(), 'reviews': _reviews?.map((Review? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'usuario': _usuario, 'nombre_negocio': _nombre_negocio, 'barrio': _barrio, 'correo': _correo, 'logo': _logo, 'banner': _banner, 'direccion': _direccion, 'telefono': _telefono, 'creado_en': _creado_en, 'categoria': _categoria, 'descripcion': _descripcion, 'horario': _horario, 'puntuacion_promedio': _puntuacion_promedio, 'cupones': _cupones, 'reviews': _reviews, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'usuarioID': _usuarioID,
+    'usuario': _usuario,
+    'nombre_negocio': _nombre_negocio,
+    'correo': _correo,
+    'logo': _logo,
+    'banner': _banner,
+    'direccion': _direccion,
+    'telefono': _telefono,
+    'barrio': _barrio,
+    'categoriaID': _categoriaID,
+    'categoria': _categoria,
+    'descripcion': _descripcion,
+    'horario': _horario,
+    'puntuacion_promedio': _puntuacion_promedio,
+    'cupones': _cupones,
+    'reviews': _reviews,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<NegocioModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<NegocioModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField USUARIO = QueryField(
+  static final amplify_core.QueryModelIdentifier<NegocioModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<NegocioModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final USUARIOID = amplify_core.QueryField(fieldName: "usuarioID");
+  static final USUARIO = amplify_core.QueryField(
     fieldName: "usuario",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
-  static final QueryField NOMBRE_NEGOCIO = QueryField(fieldName: "nombre_negocio");
-  static final QueryField BARRIO = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Usuario'));
+  static final NOMBRE_NEGOCIO = amplify_core.QueryField(fieldName: "nombre_negocio");
+  static final CORREO = amplify_core.QueryField(fieldName: "correo");
+  static final LOGO = amplify_core.QueryField(fieldName: "logo");
+  static final BANNER = amplify_core.QueryField(fieldName: "banner");
+  static final DIRECCION = amplify_core.QueryField(fieldName: "direccion");
+  static final TELEFONO = amplify_core.QueryField(fieldName: "telefono");
+  static final BARRIO = amplify_core.QueryField(
     fieldName: "barrio",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Barrio'));
-  static final QueryField CORREO = QueryField(fieldName: "correo");
-  static final QueryField LOGO = QueryField(fieldName: "logo");
-  static final QueryField BANNER = QueryField(fieldName: "banner");
-  static final QueryField DIRECCION = QueryField(fieldName: "direccion");
-  static final QueryField TELEFONO = QueryField(fieldName: "telefono");
-  static final QueryField CREADO_EN = QueryField(fieldName: "creado_en");
-  static final QueryField CATEGORIA = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Barrio'));
+  static final CATEGORIAID = amplify_core.QueryField(fieldName: "categoriaID");
+  static final CATEGORIA = amplify_core.QueryField(
     fieldName: "categoria",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Categoria'));
-  static final QueryField DESCRIPCION = QueryField(fieldName: "descripcion");
-  static final QueryField HORARIO = QueryField(fieldName: "horario");
-  static final QueryField PUNTUACION_PROMEDIO = QueryField(fieldName: "puntuacion_promedio");
-  static final QueryField CUPONES = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Categoria'));
+  static final DESCRIPCION = amplify_core.QueryField(fieldName: "descripcion");
+  static final HORARIO = amplify_core.QueryField(fieldName: "horario");
+  static final PUNTUACION_PROMEDIO = amplify_core.QueryField(fieldName: "puntuacion_promedio");
+  static final CUPONES = amplify_core.QueryField(
     fieldName: "cupones",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Cupon'));
-  static final QueryField REVIEWS = QueryField(
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Cupon'));
+  static final REVIEWS = amplify_core.QueryField(
     fieldName: "reviews",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Review'));
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Review'));
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Negocio";
     modelSchemaDefinition.pluralName = "Negocios";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.PUBLIC,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.READ,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE
+        ]),
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.READ,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE
         ])
     ];
     
     modelSchemaDefinition.indexes = [
-      ModelIndex(fields: const ["barrioID"], name: "byBarrio"),
-      ModelIndex(fields: const ["categoriaID"], name: "byCategoria")
+      amplify_core.ModelIndex(fields: const ["usuarioID"], name: "byUsuario"),
+      amplify_core.ModelIndex(fields: const ["barrioID"], name: "byBarrio"),
+      amplify_core.ModelIndex(fields: const ["categoriaID"], name: "byCatergoria")
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.USUARIOID,
+      isRequired: false,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Negocio.USUARIO,
       isRequired: false,
-      targetNames: ['usuarioID'],
+      targetNames: ['id'],
       ofModelName: 'Usuario'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Negocio.NOMBRE_NEGOCIO,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.CORREO,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.LOGO,
+      isRequired: false,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.BANNER,
+      isRequired: false,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.DIRECCION,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.TELEFONO,
+      isRequired: true,
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Negocio.BARRIO,
       isRequired: false,
       targetNames: ['barrioID'],
       ofModelName: 'Barrio'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.CORREO,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.LOGO,
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
+      key: Negocio.CATEGORIAID,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.BANNER,
-      isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.DIRECCION,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.TELEFONO,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Negocio.CREADO_EN,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.belongsTo(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.belongsTo(
       key: Negocio.CATEGORIA,
       isRequired: false,
-      targetNames: ['categoriaID'],
+      targetNames: ['id'],
       ofModelName: 'Categoria'
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Negocio.DESCRIPCION,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Negocio.HORARIO,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Negocio.PUNTUACION_PROMEDIO,
       isRequired: false,
-      ofType: ModelFieldType(ModelFieldTypeEnum.double)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.double)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.hasMany(
       key: Negocio.CUPONES,
       isRequired: false,
       ofModelName: 'Cupon',
-      associatedKey: Cupon.NEGOCIO
+      associatedKey: Cupon.NEGOCIOID
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.hasMany(
       key: Negocio.REVIEWS,
       isRequired: false,
       ofModelName: 'Review',
       associatedKey: Review.NEGOCIO
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _NegocioModelType extends ModelType<Negocio> {
+class _NegocioModelType extends amplify_core.ModelType<Negocio> {
   const _NegocioModelType();
   
   @override
@@ -496,8 +567,7 @@ class _NegocioModelType extends ModelType<Negocio> {
  * This is an auto generated class representing the model identifier
  * of [Negocio] in your schema.
  */
-@immutable
-class NegocioModelIdentifier implements ModelIdentifier<Negocio> {
+class NegocioModelIdentifier implements amplify_core.ModelIdentifier<Negocio> {
   final String id;
 
   /** Create an instance of NegocioModelIdentifier using [id] the primary key. */

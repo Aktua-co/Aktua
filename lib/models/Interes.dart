@@ -20,20 +20,18 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 
 /** This is an auto generated class representing the Interes type in your schema. */
-@immutable
-class Interes extends Model {
+class Interes extends amplify_core.Model {
   static const classType = const _InteresModelType();
   final String id;
   final String? _nombre;
   final List<GrupoInteres>? _grupos;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -52,10 +50,10 @@ class Interes extends Model {
     try {
       return _nombre!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -65,11 +63,11 @@ class Interes extends Model {
     return _grupos;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
@@ -77,7 +75,7 @@ class Interes extends Model {
   
   factory Interes({String? id, required String nombre, List<GrupoInteres>? grupos}) {
     return Interes._internal(
-      id: id == null ? UUID.getUUID() : id,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       nombre: nombre,
       grupos: grupos != null ? List<GrupoInteres>.unmodifiable(grupos) : grupos);
   }
@@ -119,6 +117,17 @@ class Interes extends Model {
       grupos: grupos ?? this.grupos);
   }
   
+  Interes copyWithModelFieldValues({
+    ModelFieldValue<String>? nombre,
+    ModelFieldValue<List<GrupoInteres>?>? grupos
+  }) {
+    return Interes._internal(
+      id: id,
+      nombre: nombre == null ? this.nombre : nombre.value,
+      grupos: grupos == null ? this.grupos : grupos.value
+    );
+  }
+  
   Interes.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _nombre = json['nombre'],
@@ -128,73 +137,77 @@ class Interes extends Model {
           .map((e) => GrupoInteres.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
     'id': id, 'nombre': _nombre, 'grupos': _grupos?.map((GrupoInteres? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'nombre': _nombre, 'grupos': _grupos, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'nombre': _nombre,
+    'grupos': _grupos,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<InteresModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<InteresModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField NOMBRE = QueryField(fieldName: "nombre");
-  static final QueryField GRUPOS = QueryField(
+  static final amplify_core.QueryModelIdentifier<InteresModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<InteresModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final NOMBRE = amplify_core.QueryField(fieldName: "nombre");
+  static final GRUPOS = amplify_core.QueryField(
     fieldName: "grupos",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'GrupoInteres'));
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'GrupoInteres'));
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Interes";
     modelSchemaDefinition.pluralName = "Interes";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE,
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE,
+          amplify_core.ModelOperation.READ
         ])
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Interes.NOMBRE,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.hasMany(
       key: Interes.GRUPOS,
       isRequired: false,
       ofModelName: 'GrupoInteres',
       associatedKey: GrupoInteres.INTERES
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _InteresModelType extends ModelType<Interes> {
+class _InteresModelType extends amplify_core.ModelType<Interes> {
   const _InteresModelType();
   
   @override
@@ -212,8 +225,7 @@ class _InteresModelType extends ModelType<Interes> {
  * This is an auto generated class representing the model identifier
  * of [Interes] in your schema.
  */
-@immutable
-class InteresModelIdentifier implements ModelIdentifier<Interes> {
+class InteresModelIdentifier implements amplify_core.ModelIdentifier<Interes> {
   final String id;
 
   /** Create an instance of InteresModelIdentifier using [id] the primary key. */

@@ -20,22 +20,19 @@
 // ignore_for_file: public_member_api_docs, annotate_overrides, dead_code, dead_codepublic_member_api_docs, depend_on_referenced_packages, file_names, library_private_types_in_public_api, no_leading_underscores_for_library_prefixes, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, null_check_on_nullable_type_parameter, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_if_null_operators, prefer_interpolation_to_compose_strings, slash_for_doc_comments, sort_child_properties_last, unnecessary_const, unnecessary_constructor_name, unnecessary_late, unnecessary_new, unnecessary_null_aware_assignments, unnecessary_nullable_for_final_variable_declarations, unnecessary_string_interpolations, use_build_context_synchronously
 
 import 'ModelProvider.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_core/amplify_core.dart' as amplify_core;
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 
 
 /** This is an auto generated class representing the Categoria type in your schema. */
-@immutable
-class Categoria extends Model {
+class Categoria extends amplify_core.Model {
   static const classType = const _CategoriaModelType();
   final String id;
-  final String? _id_categoria;
   final String? _nombre;
   final String? _descripcion;
   final List<Negocio>? _negocios;
-  final TemporalDateTime? _createdAt;
-  final TemporalDateTime? _updatedAt;
+  final amplify_core.TemporalDateTime? _createdAt;
+  final amplify_core.TemporalDateTime? _updatedAt;
 
   @override
   getInstanceType() => classType;
@@ -50,27 +47,14 @@ class Categoria extends Model {
       );
   }
   
-  String get id_categoria {
-    try {
-      return _id_categoria!;
-    } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
-    }
-  }
-  
   String get nombre {
     try {
       return _nombre!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -80,10 +64,10 @@ class Categoria extends Model {
     try {
       return _descripcion!;
     } catch(e) {
-      throw new AmplifyCodeGenModelException(
-          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+      throw amplify_core.AmplifyCodeGenModelException(
+          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
           recoverySuggestion:
-            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
           underlyingException: e.toString()
           );
     }
@@ -93,20 +77,19 @@ class Categoria extends Model {
     return _negocios;
   }
   
-  TemporalDateTime? get createdAt {
+  amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
   
-  TemporalDateTime? get updatedAt {
+  amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
   
-  const Categoria._internal({required this.id, required id_categoria, required nombre, required descripcion, negocios, createdAt, updatedAt}): _id_categoria = id_categoria, _nombre = nombre, _descripcion = descripcion, _negocios = negocios, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Categoria._internal({required this.id, required nombre, required descripcion, negocios, createdAt, updatedAt}): _nombre = nombre, _descripcion = descripcion, _negocios = negocios, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Categoria({String? id, required String id_categoria, required String nombre, required String descripcion, List<Negocio>? negocios}) {
+  factory Categoria({String? id, required String nombre, required String descripcion, List<Negocio>? negocios}) {
     return Categoria._internal(
-      id: id == null ? UUID.getUUID() : id,
-      id_categoria: id_categoria,
+      id: id == null ? amplify_core.UUID.getUUID() : id,
       nombre: nombre,
       descripcion: descripcion,
       negocios: negocios != null ? List<Negocio>.unmodifiable(negocios) : negocios);
@@ -121,7 +104,6 @@ class Categoria extends Model {
     if (identical(other, this)) return true;
     return other is Categoria &&
       id == other.id &&
-      _id_categoria == other._id_categoria &&
       _nombre == other._nombre &&
       _descripcion == other._descripcion &&
       DeepCollectionEquality().equals(_negocios, other._negocios);
@@ -136,7 +118,6 @@ class Categoria extends Model {
     
     buffer.write("Categoria {");
     buffer.write("id=" + "$id" + ", ");
-    buffer.write("id_categoria=" + "$_id_categoria" + ", ");
     buffer.write("nombre=" + "$_nombre" + ", ");
     buffer.write("descripcion=" + "$_descripcion" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
@@ -146,18 +127,29 @@ class Categoria extends Model {
     return buffer.toString();
   }
   
-  Categoria copyWith({String? id_categoria, String? nombre, String? descripcion, List<Negocio>? negocios}) {
+  Categoria copyWith({String? nombre, String? descripcion, List<Negocio>? negocios}) {
     return Categoria._internal(
       id: id,
-      id_categoria: id_categoria ?? this.id_categoria,
       nombre: nombre ?? this.nombre,
       descripcion: descripcion ?? this.descripcion,
       negocios: negocios ?? this.negocios);
   }
   
+  Categoria copyWithModelFieldValues({
+    ModelFieldValue<String>? nombre,
+    ModelFieldValue<String>? descripcion,
+    ModelFieldValue<List<Negocio>?>? negocios
+  }) {
+    return Categoria._internal(
+      id: id,
+      nombre: nombre == null ? this.nombre : nombre.value,
+      descripcion: descripcion == null ? this.descripcion : descripcion.value,
+      negocios: negocios == null ? this.negocios : negocios.value
+    );
+  }
+  
   Categoria.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
-      _id_categoria = json['id_categoria'],
       _nombre = json['nombre'],
       _descripcion = json['descripcion'],
       _negocios = json['negocios'] is List
@@ -166,94 +158,92 @@ class Categoria extends Model {
           .map((e) => Negocio.fromJson(new Map<String, dynamic>.from(e['serializedData'])))
           .toList()
         : null,
-      _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
+      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
+      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'id_categoria': _id_categoria, 'nombre': _nombre, 'descripcion': _descripcion, 'negocios': _negocios?.map((Negocio? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'nombre': _nombre, 'descripcion': _descripcion, 'negocios': _negocios?.map((Negocio? e) => e?.toJson()).toList(), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'id_categoria': _id_categoria, 'nombre': _nombre, 'descripcion': _descripcion, 'negocios': _negocios, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id,
+    'nombre': _nombre,
+    'descripcion': _descripcion,
+    'negocios': _negocios,
+    'createdAt': _createdAt,
+    'updatedAt': _updatedAt
   };
 
-  static final QueryModelIdentifier<CategoriaModelIdentifier> MODEL_IDENTIFIER = QueryModelIdentifier<CategoriaModelIdentifier>();
-  static final QueryField ID = QueryField(fieldName: "id");
-  static final QueryField ID_CATEGORIA = QueryField(fieldName: "id_categoria");
-  static final QueryField NOMBRE = QueryField(fieldName: "nombre");
-  static final QueryField DESCRIPCION = QueryField(fieldName: "descripcion");
-  static final QueryField NEGOCIOS = QueryField(
+  static final amplify_core.QueryModelIdentifier<CategoriaModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<CategoriaModelIdentifier>();
+  static final ID = amplify_core.QueryField(fieldName: "id");
+  static final NOMBRE = amplify_core.QueryField(fieldName: "nombre");
+  static final DESCRIPCION = amplify_core.QueryField(fieldName: "descripcion");
+  static final NEGOCIOS = amplify_core.QueryField(
     fieldName: "negocios",
-    fieldType: ModelFieldType(ModelFieldTypeEnum.model, ofModelName: 'Negocio'));
-  static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
+    fieldType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.model, ofModelName: 'Negocio'));
+  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Categoria";
     modelSchemaDefinition.pluralName = "Categorias";
     
     modelSchemaDefinition.authRules = [
-      AuthRule(
-        authStrategy: AuthStrategy.OWNER,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.OWNER,
         ownerField: "owner",
         identityClaim: "cognito:username",
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.READ
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.READ
         ]),
-      AuthRule(
-        authStrategy: AuthStrategy.GROUPS,
+      amplify_core.AuthRule(
+        authStrategy: amplify_core.AuthStrategy.GROUPS,
         groupClaim: "cognito:groups",
         groups: [ "Admin" ],
-        provider: AuthRuleProvider.USERPOOLS,
-        operations: [
-          ModelOperation.CREATE,
-          ModelOperation.UPDATE,
-          ModelOperation.DELETE
+        provider: amplify_core.AuthRuleProvider.USERPOOLS,
+        operations: const [
+          amplify_core.ModelOperation.CREATE,
+          amplify_core.ModelOperation.UPDATE,
+          amplify_core.ModelOperation.DELETE
         ])
     ];
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.id());
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Categoria.ID_CATEGORIA,
-      isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Categoria.NOMBRE,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
       key: Categoria.DESCRIPCION,
       isRequired: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.string)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.hasMany(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.hasMany(
       key: Categoria.NEGOCIOS,
       isRequired: false,
       ofModelName: 'Negocio',
-      associatedKey: Negocio.CATEGORIA
+      associatedKey: Negocio.CATEGORIAID
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'createdAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
     
-    modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
+    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
       fieldName: 'updatedAt',
       isRequired: false,
       isReadOnly: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
+      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
     ));
   });
 }
 
-class _CategoriaModelType extends ModelType<Categoria> {
+class _CategoriaModelType extends amplify_core.ModelType<Categoria> {
   const _CategoriaModelType();
   
   @override
@@ -271,8 +261,7 @@ class _CategoriaModelType extends ModelType<Categoria> {
  * This is an auto generated class representing the model identifier
  * of [Categoria] in your schema.
  */
-@immutable
-class CategoriaModelIdentifier implements ModelIdentifier<Categoria> {
+class CategoriaModelIdentifier implements amplify_core.ModelIdentifier<Categoria> {
   final String id;
 
   /** Create an instance of CategoriaModelIdentifier using [id] the primary key. */
