@@ -1,16 +1,31 @@
 # aktua_amplify
 
-A new Flutter project.
+## Requerimientos
 
-## Getting Started
+ 1. Node.js v14.x or later
+ 2. npm v6.14.4 or later
+ 3. git v2.14.1 or later
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación de flutter
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Descarga flutter desde [aquí](https://docs.flutter.dev/get-started/install)
+2. Instala flutter
+3. Verifica la instalación de flutter
+```flutter doctor```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instalar Amplify CLI
+
+1. npm install -g @aws-amplify/cli
+2. Mas informacion: https://docs.amplify.aws/flutter/start/getting-started/installation/
+
+
+## Instalación del proyecto
+
+1. Clona el repositorio:
+```git clone https://github.com/Aktua-co/Aktua.git```
+2. Navega al directorio del proyecto
+3. Instala las dependencias:
+```flutter pub get```
+4. Ejecuta el proyecto:
+```flutter run```
